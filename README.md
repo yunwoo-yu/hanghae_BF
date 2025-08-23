@@ -44,10 +44,11 @@ npm run build
 
 팀원 정보를 아래 표에 채워 주세요.
 
-| 이름   | 역할 | 한마디         | GitHub                        |
-| ------ | ---- | -------------- | ----------------------------- |
-| 박소연 | FE   | 이야 재밌겠다! | https://github.com/soyalattee |
-| 유윤우 | FE   | 이야 재밌겠다! | https://github.com/yunwoo-yu  |
-| 정민기 | FE   | 이야 재밌겠다!! | https://github.com/yunwoo-yu  |
+| 이름   | 역할 | 한마디          | GitHub                           |
+| ------ | ---- | --------------- | -------------------------------- |
+| 박소연 | FE   | 이야 재밌겠다!  | https://github.com/soyalattee    |
+| 유윤우 | FE   | 이야 재밌겠다!  | https://github.com/yunwoo-yu     |
+| 정민기 | FE   | 이야 재밌겠다!! | https://github.com/jeongmingi123 |
+| 이진희 | FE   | 이야 재밌겠다!! | https://github.com/bebusl        |
 
 # hanghae_BF
