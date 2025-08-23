@@ -48,5 +48,6 @@ npm run build
 | ------ | ---- | -------------- | ----------------------------- |
 | 박소연 | FE   | 이야 재밌겠다! | https://github.com/soyalattee |
 | 유윤우 | FE   | 이야 재밌겠다! | https://github.com/yunwoo-yu  |
+| 정민기 | FE   | 이야 재밌겠다!! | https://github.com/yunwoo-yu  |
 
 # hanghae_BF
