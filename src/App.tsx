@@ -1,5 +1,3 @@
-import 'remixicon/fonts/remixicon.css';
-
 import { Routers } from './routers/router';
 
 function App() {
