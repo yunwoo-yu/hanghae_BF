@@ -13,7 +13,7 @@ const axiosInstance = axios.create({
 export const http = {
   get: async <Response = unknown>(
     url: string,
-    options: AxiosRequestConfig = {}
+    options: AxiosRequestConfig = {},
   ) => {
     const response = await axiosInstance.get<Response>(url, options);
     return response.data;
@@ -21,21 +21,21 @@ export const http = {
   post: async <Request = unknown, Response = unknown>(
     url: string,
     data?: Request,
-    options?: AxiosRequestConfig
+    options?: AxiosRequestConfig,
   ) => {
     const response = await axiosInstance.post<Response>(url, data, options);
     return response.data;
   },
   put: async <Request = unknown, Response = unknown>(
     url: string,
-    data?: Request
+    data?: Request,
   ) => {
     const response = await axiosInstance.put<Response>(url, data);
     return response.data;
   },
   patch: async <Request = unknown, Response = unknown>(
     url: string,
-    data?: Request
+    data?: Request,
   ) => {
     const response = await axiosInstance.patch<Response>(url, data);
     return response.data;
