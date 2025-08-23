@@ -1,11 +1,7 @@
-import './App.css';
+import { Routers } from './routers/router';
 
 function App() {
-  return (
-    <div>
-      <h1 className="text-3xl font-bold text-blue-400">2팀 짱짱</h1>
-    </div>
-  );
+  return <Routers />;
 }
 
 export default App;
