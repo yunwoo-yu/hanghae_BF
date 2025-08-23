@@ -47,4 +47,6 @@ npm run build
 | 이름   | 역할 | 한마디         | GitHub                        |
 | ------ | ---- | -------------- | ----------------------------- |
 | 박소연 | FE   | 이야 재밌겠다! | https://github.com/soyalattee |
+| 유윤우 | FE   | 이야 재밌겠다! | https://github.com/yunwoo-yu  |
+
 # hanghae_BF
