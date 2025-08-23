@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router';
-import { Home } from '../pages/Home';
+
+import { Home } from '@/pages/Home';
 
 export const PATH = {
   HOME: () => '/',
