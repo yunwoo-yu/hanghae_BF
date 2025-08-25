@@ -5,10 +5,11 @@ import { Card } from '@/elements/card';
 import { Checkbox } from '@/elements/checkbox';
 import { Textarea } from '@/elements/textarea';
 
+const MAX_MESSAGE_LENGTH = 500;
 export const RollingWrite = () => {
   const [newMessage, setNewMessage] = useState('');
   const [isAnonymous, setIsAnonymous] = useState(false);
-
+  const name = '김철수';
   const handleCreateNote = () => {
     window.alert('롤링페이퍼 작성 완료');
   };
@@ -18,11 +19,11 @@ export const RollingWrite = () => {
   };
 
   return (
-    <div className="flex flex-col  h-screen px-12 py-12">
+    <div className="flex flex-col  h-screen px-2 sm:px-6 py-6">
       {/* Header */}
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-foreground mb-2">김철수님께 보내는 롤링페이퍼</h1>
-        <p className="text-muted-foreground text-lg">10주간 함께한 추억을 담아보세요</p>
+        <h1 className="text-3xl font-bold text-foreground mb-2">{name}님 롤링페이퍼</h1>
+        <p className="text-muted-foreground text-base">10주간 함께한 추억을 담아보세요</p>
       </div>
       <Card className="max-w-md mx-auto mb-8 p-6 bg-card border-border w-full gap-3">
         <h3 className="text-lg font-semibold mb-1 text-card-foreground">롤링페이퍼 작성</h3>
@@ -34,9 +35,11 @@ export const RollingWrite = () => {
               onChange={(e) => setNewMessage(e.target.value)}
               placeholder="롤링페이퍼 내용을 입력해주세요..."
               className="bg-input border-border min-h-[140px]"
-              maxLength={500}
+              maxLength={MAX_MESSAGE_LENGTH}
             />
-            <p className="text-xs text-muted-foreground mt-1">{newMessage.length}/500자</p>
+            <p className="text-sm text-muted-foreground mt-1">
+              {newMessage.length}/{MAX_MESSAGE_LENGTH}자
+            </p>
           </div>
           <div className="flex items-center gap-2 mt-4">
             <Checkbox
