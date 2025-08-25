@@ -1,3 +1,5 @@
+import { MatchingDialog } from '@/components/MatchingDialog';
+
 export const Home = () => {
   return (
     <div className="flex h-screen w-full items-center justify-center">
