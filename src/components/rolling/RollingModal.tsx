@@ -1,72 +1,30 @@
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
-import { useState } from 'react';
 
 import { Button } from '@/elements/button';
 import { Card, CardContent } from '@/elements/card';
+import type { IRollingPaper } from '@/pages/RollingList';
 
-import type { IRollingPaper } from '../../pages/RollingList';
-
-interface IRollingPapersProps {
+interface RollingModalProps {
+  selectedPaper: string;
+  closeModal: () => void;
+  goToPrevious: () => void;
+  goToNext: () => void;
+  currentPaper: IRollingPaper;
+  currentIndex: number;
   rollingPapers: IRollingPaper[];
 }
 
-export const RollingPapers = ({ rollingPapers }: IRollingPapersProps) => {
-  const [selectedPaper, setSelectedPaper] = useState<number | null>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const openModal = (paperId: number) => {
-    const index = rollingPapers.findIndex((paper) => paper.id === paperId);
-    setCurrentIndex(index);
-    setSelectedPaper(paperId);
-  };
-
-  const closeModal = () => {
-    setSelectedPaper(null);
-  };
-
-  const goToPrevious = () => {
-    const newIndex = currentIndex > 0 ? currentIndex - 1 : rollingPapers.length - 1;
-    setCurrentIndex(newIndex);
-    setSelectedPaper(rollingPapers[newIndex].id);
-  };
-
-  const goToNext = () => {
-    const newIndex = currentIndex < rollingPapers.length - 1 ? currentIndex + 1 : 0;
-    setCurrentIndex(newIndex);
-    setSelectedPaper(rollingPapers[newIndex].id);
-  };
-
-  const currentPaper = rollingPapers[currentIndex];
-
+const RollingModal = ({
+  selectedPaper,
+  closeModal,
+  goToPrevious,
+  goToNext,
+  currentPaper,
+  currentIndex,
+  rollingPapers,
+}: RollingModalProps) => {
   return (
     <>
-      <div>
-        {/* Grid Layout */}
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-4">
-            {rollingPapers.map((paper) => (
-              <Card
-                key={paper.id}
-                className="relative cursor-pointer transform transition-all duration-200 hover:scale-102 hover:shadow-none border-none rounded-none overflow-visible bg-transparent"
-                onClick={() => openModal(paper.id)}
-              >
-                <CardContent className="p-0">
-                  <img
-                    src={`/images/rolling/rolling_paper_${(paper.id % 6) + 1}.png`}
-                    alt="롤링페이퍼 배경"
-                    className="w-full h-auto"
-                  />
-                  <div className="absolute inset-0 p-6">
-                    <h3 className="font-semibold text-card-foreground text-lg mt-4 sm:mt-8">{paper.author}</h3>
-                    <p className="text-card-foreground line-clamp-4 leading-relaxed mt-1 sm:mt-3">{paper.content}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </div>
-
       {/* Modal Overlay */}
       {selectedPaper && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-2 z-50">
@@ -122,3 +80,5 @@ export const RollingPapers = ({ rollingPapers }: IRollingPapersProps) => {
     </>
   );
 };
+
+export default RollingModal;
