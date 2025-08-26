@@ -1,13 +1,14 @@
 import { createBrowserRouter, RouterProvider } from 'react-router';
 
 import { Home } from '@/pages/Home';
-import { RollingDetail } from '@/pages/RollingDetail';
+import { RollingList } from '@/pages/RollingList';
 import { RollingWrite } from '@/pages/RollingWrite';
 
 export const PATH = {
   HOME: () => '/',
-  ROLLING_WRITE: () => '/rolling-write',
-  ROLLING_DETAIL: () => '/rolling-detail',
+  ROLLING_WRITE: (id: string) => `/rolling-write/${id}`,
+  ROLLING_DETAIL: (id: string) => `/rolling-detail/${id}`,
+  ROLLING_LIST: (id: string) => `/rolling-list/${id}`,
 };
 
 const router = createBrowserRouter([
@@ -16,12 +17,12 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: PATH.ROLLING_WRITE(),
+    path: '/rolling-write',
     element: <RollingWrite />,
   },
   {
-    path: PATH.ROLLING_DETAIL(),
-    element: <RollingDetail />,
+    path: '/rolling-list/:id',
+    element: <RollingList />,
   },
 ]);
 
