@@ -58,7 +58,9 @@ export const RollingPapers = ({ rollingPapers }: IRollingPapersProps) => {
                   />
                   <div className="absolute inset-0 p-6">
                     <h3 className="font-semibold text-card-foreground text-lg mt-4 sm:mt-8">{paper.author}</h3>
-                    <p className="text-card-foreground line-clamp-4 leading-relaxed mt-1 sm:mt-3">{paper.content}</p>
+                    <p className="text-card-foreground line-clamp-4 sm:line-clamp-8 lg:line-clamp-4 leading-relaxed mt-1 sm:mt-3">
+                      {paper.content}
+                    </p>
                   </div>
                 </CardContent>
               </Card>
