@@ -1,5 +1,7 @@
+import { ErrorBoundary } from 'react-error-boundary';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 
+import { Error } from '@/components/Error';
 import { HobbySelect } from '@/pages/HobbySelect';
 import { Home } from '@/pages/Home';
 import { ResultDetail } from '@/pages/ResultDetail';
@@ -23,10 +25,28 @@ const router = createBrowserRouter([
   },
   {
     path: PATH.ROLLING_LIST(),
-    element: <RollingList />,
+    element: (
+      <ErrorBoundary fallback={<Error />}>
+        <RollingList />
+      </ErrorBoundary>
+    ),
   },
-  { path: PATH.RESULT_HOME(), element: <ResultHome /> },
-  { path: PATH.RESULT_DETAIL(), element: <ResultDetail /> },
+  {
+    path: PATH.RESULT_HOME(),
+    element: (
+      <ErrorBoundary fallback={<Error />}>
+        <ResultHome />
+      </ErrorBoundary>
+    ),
+  },
+  {
+    path: PATH.RESULT_DETAIL(),
+    element: (
+      <ErrorBoundary fallback={<Error />}>
+        <ResultDetail />
+      </ErrorBoundary>
+    ),
+  },
   { path: PATH.SURVEY(), element: <Survey /> },
   { path: PATH.HOBBY_SELECT(), element: <HobbySelect /> },
 ]);
