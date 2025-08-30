@@ -1,7 +1,7 @@
-import type { User } from '@/apis/users';
-import type { useMutation } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
 import React, { createContext, useContext, useEffect, useState } from 'react';
+
+import type { User } from '@/apis/users';
 
 // 사용자 정보 타입 정의
 // export interface User {
