@@ -1,8 +1,10 @@
+import { useMutation } from '@tanstack/react-query';
 import { AlertCircle, Lock, User } from 'lucide-react';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import usersData from '@/data/users.json';
+import { authenticateUser } from '@/apis/users';
+// import usersData from '@/data/users.json';
 import { Button } from '@/elements/button';
 import { Card, CardContent, CardDescription, CardHeader } from '@/elements/card';
 import { Input } from '@/elements/input';
@@ -29,6 +31,22 @@ const Login: React.FC = () => {
   const [errors, setErrors] = useState<LoginFormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword] = useState(false);
+
+  const { mutate } = useMutation({
+    mutationFn: (form: LoginFormData) => authenticateUser(form.userId, form.name),
+    onMutate: () => {
+      setIsLoading(true);
+    },
+    onSuccess: () => {
+      navigate('/hobby-select');
+    },
+    onError: () => {
+      setErrors({ general: '로그인에 실패했습니다. 다시 시도해주세요.' });
+    },
+    onSettled: () => {
+      setIsLoading(false);
+    },
+  });
 
   const validateForm = (): boolean => {
     const newErrors: LoginFormErrors = {};
@@ -63,35 +81,37 @@ const Login: React.FC = () => {
       return;
     }
 
-    setIsLoading(true);
+    mutate(formData);
 
-    try {
-      // users.json에서 입력된 이름으로 사용자 찾기
-      const foundUser = Object.values(usersData).find(
-        (userData: { name: string; id: string }) => userData.name === formData.name
-      );
+    // setIsLoading(true);
 
-      if (!foundUser) {
-        setErrors({ name: '존재하지 않는 아이디입니다.' });
-        return;
-      }
+    // try {
+    //   // users.json에서 입력된 이름으로 사용자 찾기
+    //   const foundUser = Object.values(usersData).find(
+    //     (userData: { name: string; id: string }) => userData.name === formData.name
+    //   );
 
-      // 찾은 사용자의 id와 입력된 userId(비밀번호) 비교
-      if (foundUser.id !== formData.userId) {
-        setErrors({ userId: '존재하지 않는 비밀번호입니다.' });
-        return;
-      }
+    //   if (!foundUser) {
+    //     setErrors({ name: '존재하지 않는 아이디입니다.' });
+    //     return;
+    //   }
 
-      // 로그인 성공
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // 임시 딜레이
+    //   // 찾은 사용자의 id와 입력된 userId(비밀번호) 비교
+    //   if (foundUser.id !== formData.userId) {
+    //     setErrors({ userId: '존재하지 않는 비밀번호입니다.' });
+    //     return;
+    //   }
 
-      // 로그인 성공 시 /hobby-select 페이지로 이동
-      navigate('/hobby-select');
-    } catch {
-      setErrors({ general: '로그인에 실패했습니다. 다시 시도해주세요.' });
-    } finally {
-      setIsLoading(false);
-    }
+    //   // 로그인 성공
+    //   await new Promise((resolve) => setTimeout(resolve, 1000)); // 임시 딜레이
+
+    //   // 로그인 성공 시 /hobby-select 페이지로 이동
+    //   navigate('/hobby-select');
+    // } catch {
+    //   setErrors({ general: '로그인에 실패했습니다. 다시 시도해주세요.' });
+    // } finally {
+    //   setIsLoading(false);
+    // }
   };
 
   return (
