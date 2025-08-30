@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { AlertCircle, Github, Heart, Sparkles, Star, User, Zap } from 'lucide-react';
+import { AlertCircle, Eye, EyeOff, Github, Heart, Sparkles, Star, User, Zap } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
@@ -32,7 +32,7 @@ export const Login = () => {
 
   const [errors, setErrors] = useState<LoginFormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
-  const [showPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const { mutate } = useMutation({
     mutationFn: (form: LoginFormData) => authenticateUser(form.userId, form.name),
@@ -195,6 +195,17 @@ export const Login = () => {
                       className={`text-sm pl-10 pr-10 transition-all ${errors.userId ? 'border-red-500 focus-visible:border-red-500' : 'focus-visible:border-blue-500'}`}
                       disabled={isLoading}
                     />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none"
+                    >
+                      {showPassword ? (
+                        <EyeOff className="h-4 w-4 transition-colors" />
+                      ) : (
+                        <Eye className="h-4 w-4 transition-colors" />
+                      )}
+                    </button>
                   </div>
                   {errors.userId && (
                     <div className="flex items-center gap-2 text-sm text-red-500">
