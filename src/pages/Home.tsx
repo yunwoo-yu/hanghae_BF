@@ -7,6 +7,7 @@ import { Layout } from '@/elements/layout';
 export const Home = () => {
   const [showSplash, setShowSplash] = useState(true);
 
+  /** splash screen 완료 시 호출 */
   const handleSplashComplete = () => {
     setShowSplash(false);
   };
