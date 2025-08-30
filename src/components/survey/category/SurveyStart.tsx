@@ -23,7 +23,7 @@ export const SurveyStart = () => {
         </div>
 
         {/* 메인 질문 */}
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-4 lg:mb-6 leading-tight">
+        <h2 className="text-2xl font-PyeongchangPeace sm:text-3xl md:text-4xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-4 lg:mb-6 leading-tight">
           나와 찰떡궁합인 항해인은?
         </h2>
 
@@ -33,7 +33,7 @@ export const SurveyStart = () => {
             성향, 가치관, 입맛까지!
           </p>
           <p className="text-gray-500 text-sm sm:text-base md:text-lg lg:text-base">
-            3단계 간단 설문으로 당신의 BF를 찾아드릴게요
+            3단계 간단 설문으로 당신의 베프를 찾아드릴게요
           </p>
         </div>
       </div>

@@ -30,7 +30,7 @@ export const SurveyPersonality = () => {
               <BrainIcon className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-9 lg:h-9 xl:w-10 xl:h-10 text-pink-600" />
             </div>
           </div>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-3xl xl:text-4xl font-bold bg-gradient-to-r from-pink-600 to-pink-700 bg-clip-text text-transparent mb-3 lg:mb-4">
+          <h1 className="text-2xl font-PyeongchangPeace sm:text-3xl md:text-4xl lg:text-3xl xl:text-4xl font-bold bg-gradient-to-r from-pink-600 to-pink-700 bg-clip-text text-transparent mb-3 lg:mb-4">
             성향 조사
           </h1>
         </div>

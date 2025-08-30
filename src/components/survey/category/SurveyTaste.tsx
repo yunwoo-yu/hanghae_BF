@@ -30,7 +30,7 @@ export const SurveyTaste = () => {
             </div>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-3xl xl:text-4xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent mb-3 lg:mb-4">
+          <h1 className="text-2xl font-PyeongchangPeace sm:text-3xl md:text-4xl lg:text-3xl xl:text-4xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent mb-3 lg:mb-4">
             입맛 분석
           </h1>
         </div>

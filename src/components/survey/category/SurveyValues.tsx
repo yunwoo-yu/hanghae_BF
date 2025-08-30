@@ -29,7 +29,7 @@ export const SurveyValues = () => {
               <HeartIcon className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-9 lg:h-9 xl:w-10 xl:h-10 text-amber-600" />
             </div>
           </div>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-3xl xl:text-4xl font-bold bg-gradient-to-r from-amber-600 to-amber-700 bg-clip-text text-transparent mb-3 lg:mb-4">
+          <h1 className="text-2xl sm:text-3xl font-PyeongchangPeace md:text-4xl lg:text-3xl xl:text-4xl font-bold bg-gradient-to-r from-amber-600 to-amber-700 bg-clip-text text-transparent mb-3 lg:mb-4">
             가치관 분석
           </h1>
         </div>

@@ -7,8 +7,8 @@ export const SURVEY_CARDS = {
   personality: {
     type: 'personality',
     icon: brainSvg,
-    title: '성향 분석',
-    description: '10가지 질문으로 알아보는\n나의 성향 유형',
+    title: '성향',
+    description: '어떤 사람인지 알아보는 성향 테스트',
     colors: {
       gradient: 'from-pink-200 to-pink-300',
       border: 'border-pink-200',
@@ -20,8 +20,8 @@ export const SURVEY_CARDS = {
   value: {
     type: 'value',
     icon: hmmSvg,
-    title: '가치관 분석',
-    description: '무엇을 더 중요하게 생각하는지\n알아보는 가치관 테스트',
+    title: '가치관',
+    description: '무엇을 중요하게 여기는지 알아보는 가치관 테스트',
     colors: {
       gradient: 'from-amber-200 to-amber-300',
       border: 'border-amber-200',
@@ -33,8 +33,8 @@ export const SURVEY_CARDS = {
   taste: {
     type: 'taste',
     icon: foodSvg,
-    title: '입맛 궁합',
-    description: '나와 잘 맞는 입맛을\n찾아보는 입맛 취향 분석',
+    title: '입맛',
+    description: '어떤 음식을 좋아하는지 알아보는 입맛 테스트',
     colors: {
       gradient: 'from-red-200 to-red-300',
       border: 'border-red-200',

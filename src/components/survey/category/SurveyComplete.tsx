@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { CheckCircleIcon, SparklesIcon, TrophyIcon } from 'lucide-react';
+import { CheckCircleIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { saveSurveyAnswers } from '@/apis/users';
@@ -51,7 +51,6 @@ export const SurveyComplete = () => {
 
   useEffect(() => {
     if (user?.id && Object.keys(answers).length > 0) {
-      console.log('Sending answers:', answers);
       mutate();
     }
   }, [user?.id, answers]);
@@ -61,32 +60,16 @@ export const SurveyComplete = () => {
       {/* 왼쪽 섹션: 완료 아이콘 + 텍스트 */}
       <div className="flex-1 text-center">
         <div className="text-center flex flex-col items-center justify-center mb-8 lg:mb-0 relative">
-          {/* 배경 장식 */}
-          <div className="absolute -top-4 -left-4 lg:-left-8">
-            <SparklesIcon className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400 animate-pulse" />
-          </div>
-          <div className="absolute -top-2 -right-4 lg:-right-8">
-            <SparklesIcon className="w-4 h-4 sm:w-6 sm:h-6 text-pink-400 animate-pulse delay-500" />
-          </div>
-
           <div className="flex justify-center lg:justify-start mb-6 lg:mb-8">
             <div className="relative">
               {/* 메인 완료 아이콘 */}
               <div className="inline-flex items-center justify-center w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-28 lg:h-28 xl:w-32 xl:h-32 bg-gradient-to-br from-emerald-100 via-green-200 to-emerald-300 rounded-full shadow-2xl relative z-10">
                 <CheckCircleIcon className="w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 lg:w-16 lg:h-16 xl:w-18 xl:h-18 text-emerald-600" />
               </div>
-
-              {/* 트로피 아이콘 */}
-              <div className="absolute -top-2 -right-2 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-yellow-200 to-yellow-400 rounded-full flex items-center justify-center shadow-lg">
-                <TrophyIcon className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-700" />
-              </div>
-
-              {/* 회전하는 링 */}
-              <div className="absolute inset-0 rounded-full border-4 border-dashed border-emerald-300 animate-spin opacity-30"></div>
             </div>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-emerald-600 via-green-600 to-emerald-700 bg-clip-text text-transparent mb-4 lg:mb-6 leading-tight">
+          <h2 className="text-3xl font-PyeongchangPeace sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-emerald-600 via-green-600 to-emerald-700 bg-clip-text text-transparent mb-4 lg:mb-6 leading-tight">
             설문조사 완료!
           </h2>
           <p className="text-gray-600 text-lg sm:text-xl md:text-2xl lg:text-xl font-medium">소중한 답변 감사합니다</p>
@@ -103,14 +86,11 @@ export const SurveyComplete = () => {
 
           <div className="relative z-10 mb-6 lg:mb-8 text-center lg:text-left">
             <div className="flex items-center justify-center lg:justify-start gap-2 mb-2">
-              <SparklesIcon className="w-5 h-5 text-blue-600" />
               <h3 className="text-blue-700 font-bold text-xl sm:text-2xl md:text-3xl lg:text-2xl xl:text-3xl">
                 결과 공개는
               </h3>
             </div>
-            <p className="text-blue-600 text-base sm:text-lg md:text-xl lg:text-lg">
-              2025년 9월 6일까지 기다려주세요! 🎯
-            </p>
+            <p className="text-blue-600 text-base sm:text-lg md:text-xl lg:text-lg">2025년 9월 6일까지 기다려주세요!</p>
           </div>
 
           {/* 카운트다운 타이머 */}
@@ -135,7 +115,6 @@ export const SurveyComplete = () => {
           size="lg"
           onClick={resetSurvey}
         >
-          <SparklesIcon className="w-5 h-5 mr-2" />
           설문 다시하기
         </Button>
       </div>

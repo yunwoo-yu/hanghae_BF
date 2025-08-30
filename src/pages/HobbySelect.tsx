@@ -16,6 +16,7 @@ import { HOBBIES } from '@/utils/hobbyUtils';
 export const HobbySelect = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+
   const [selectedHobbies, setSelectedHobbies] = useState<string[]>([]);
   const { mutate } = useMutation({
     mutationFn: ({ userHobbies, userId }: { userHobbies: string[]; userId: string }) =>
@@ -70,7 +71,7 @@ export const HobbySelect = () => {
             <ShipLogo />
           </div>
         </div>
-        <p className="text-center text-3xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent mb-3">
+        <p className="text-center text-3xl font-bold font-PyeongchangPeace bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent mb-3">
           취미를 선택해주세요
         </p>
         {/* 진행 상태 */}
