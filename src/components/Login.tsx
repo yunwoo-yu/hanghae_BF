@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router';
 
 import { authenticateUser } from '@/apis/users';
 // import usersData from '@/data/users.json';
+import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/elements/button';
 import { Card, CardContent, CardDescription, CardHeader } from '@/elements/card';
 import { Input } from '@/elements/input';
@@ -23,6 +24,7 @@ interface LoginFormErrors {
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
+  const { login } = useAuth(); // AuthContext에서 login 함수 가져오기
   const [formData, setFormData] = useState<LoginFormData>({
     name: '',
     userId: '',
@@ -101,17 +103,6 @@ const Login: React.FC = () => {
     //     setErrors({ userId: '존재하지 않는 비밀번호입니다.' });
     //     return;
     //   }
-
-    //   // 로그인 성공
-    //   await new Promise((resolve) => setTimeout(resolve, 1000)); // 임시 딜레이
-
-    //   // 로그인 성공 시 /hobby-select 페이지로 이동
-    //   navigate('/hobby-select');
-    // } catch {
-    //   setErrors({ general: '로그인에 실패했습니다. 다시 시도해주세요.' });
-    // } finally {
-    //   setIsLoading(false);
-    // }
   };
 
   return (
