@@ -19,7 +19,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 py-8 relative">
       {/* 화려한 배경 애니메이션 */}
       <div className="absolute inset-0 z-0">
         {/* 화려한 파티클들 */}
