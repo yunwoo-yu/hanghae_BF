@@ -15,13 +15,13 @@ import { HOBBIES } from '@/utils/hobbyUtils';
 
 export const HobbySelect = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
-
+  const { user, login } = useAuth();
   const [selectedHobbies, setSelectedHobbies] = useState<string[]>([]);
   const { mutate } = useMutation({
     mutationFn: ({ userHobbies, userId }: { userHobbies: string[]; userId: string }) =>
       updateUserHobbies(userId, userHobbies),
-    onSuccess: () => {
+    onSuccess: (res) => {
+      login(res.data);
       navigate(PATH.SURVEY());
     },
     onError: () => {

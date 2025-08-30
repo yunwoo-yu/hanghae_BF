@@ -54,11 +54,12 @@ export const authenticateUser = async (userId: string, name: string): Promise<Au
 export const updateUserHobbies = async (
   userId: string,
   hobbies: string[]
-): Promise<{ success: boolean; message: string }> => {
+): Promise<{ success: boolean; message: string; data: User }> => {
   const userDoc = doc(db, 'users', userId);
 
   // 문서 존재 여부 확인
   const userSnapshot = await getDoc(userDoc);
+  const userData = userSnapshot.data() as User;
   if (!userSnapshot.exists()) {
     throw new Error('사용자를 찾을 수 없습니다.');
   }
@@ -68,7 +69,11 @@ export const updateUserHobbies = async (
     updatedAt: new Date().toISOString(),
   });
 
-  return { success: true, message: '취미가 성공적으로 업데이트되었습니다.' };
+  return {
+    success: true,
+    message: '취미가 성공적으로 업데이트되었습니다.',
+    data: { ...userData, id: userId, hobbies },
+  };
 };
 
 //3. 모든 유저 가져오기
