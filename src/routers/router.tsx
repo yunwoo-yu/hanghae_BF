@@ -2,6 +2,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 
 import { Error } from '@/components/Error';
+import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { HobbySelect } from '@/pages/HobbySelect';
 import { Login } from '@/pages/Login';
 import { NotFound } from '@/pages/NotFound';
@@ -24,34 +25,62 @@ export const PATH = {
 
 const router = createBrowserRouter([
   {
-    path: PATH.ROLLING_LIST(),
-    element: (
-      <ErrorBoundary fallback={<Error />}>
-        <RollingList />
-      </ErrorBoundary>
-    ),
+    path: PATH.SPLASH(),
+    element: <Splash />,
   },
   {
-    path: PATH.RESULT_HOME(),
-    element: (
-      <ErrorBoundary fallback={<Error />}>
-        <ResultHome />
-      </ErrorBoundary>
-    ),
+    path: PATH.LOGIN(),
+    element: <Login />,
   },
   {
-    path: PATH.RESULT_DETAIL(),
-    element: (
-      <ErrorBoundary fallback={<Error />}>
-        <ResultDetail />
-      </ErrorBoundary>
-    ),
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: PATH.ROLLING_LIST(),
+        element: (
+          <ErrorBoundary fallback={<Error />}>
+            <RollingList />
+          </ErrorBoundary>
+        ),
+      },
+      {
+        path: PATH.RESULT_HOME(),
+        element: (
+          <ErrorBoundary fallback={<Error />}>
+            <ResultHome />
+          </ErrorBoundary>
+        ),
+      },
+      {
+        path: PATH.RESULT_DETAIL(),
+        element: (
+          <ErrorBoundary fallback={<Error />}>
+            <ResultDetail />
+          </ErrorBoundary>
+        ),
+      },
+      {
+        path: PATH.SURVEY(),
+        element: (
+          <ErrorBoundary fallback={<Error />}>
+            <Survey />
+          </ErrorBoundary>
+        ),
+      },
+      {
+        path: PATH.HOBBY_SELECT(),
+        element: (
+          <ErrorBoundary fallback={<Error />}>
+            <HobbySelect />
+          </ErrorBoundary>
+        ),
+      },
+    ],
   },
-  { path: PATH.SPLASH(), element: <Splash /> },
-  { path: PATH.LOGIN(), element: <Login /> },
-  { path: PATH.SURVEY(), element: <Survey /> },
-  { path: PATH.HOBBY_SELECT(), element: <HobbySelect /> },
-  { path: PATH.NOT_FOUND(), element: <NotFound /> },
+  {
+    path: PATH.NOT_FOUND(),
+    element: <NotFound />,
+  },
 ]);
 
 export const Routers = () => {

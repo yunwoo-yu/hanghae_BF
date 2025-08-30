@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { Navigate, useNavigate } from 'react-router';
 
 import { updateUserHobbies } from '@/apis/users';
 import { useAuth } from '@/contexts/AuthContext';
@@ -57,6 +57,8 @@ export const HobbySelect = () => {
       mutate({ userHobbies: selectedHobbies, userId: user.id });
     }
   };
+
+  if (user?.hobbies.length) return <Navigate to={PATH.SURVEY()} />;
 
   return (
     <Layout>

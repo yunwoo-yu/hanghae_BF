@@ -1,14 +1,17 @@
 import { Heart, Sparkles, Star, Zap } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { Navigate, useNavigate } from 'react-router';
 import { twMerge } from 'tailwind-merge';
 
 import { getParticleColor } from '@/utils/particleUtils';
+import { useAuth } from '@/contexts/AuthContext';
+import { PATH } from '@/routers/router';
 
 export const Splash = () => {
   const navigate = useNavigate();
   const [stage, setStage] = useState(0);
   const [showRipple, setShowRipple] = useState(false);
+  const { user } = useAuth();
 
   const handleStart = () => {
     navigate('/login');
@@ -25,6 +28,8 @@ export const Splash = () => {
 
     return () => timers.forEach(clearTimeout);
   }, []);
+
+  if (user) return <Navigate to={PATH.HOBBY_SELECT()} />;
 
   const HeartIcon = () => (
     <div className="relative">
