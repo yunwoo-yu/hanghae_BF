@@ -4,9 +4,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import { authenticateUser } from '@/apis/users';
-// import usersData from '@/data/users.json';
 import { useAuth } from '@/contexts/AuthContext';
-import usersData from '@/data/users.json';
 import { Button } from '@/elements/button';
 import { Card, CardContent, CardDescription, CardHeader } from '@/elements/card';
 import { Input } from '@/elements/input';

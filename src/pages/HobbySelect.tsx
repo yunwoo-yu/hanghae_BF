@@ -1,11 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 import { updateUserHobbies } from '@/apis/users';
+import { useAuth } from '@/contexts/AuthContext';
 import { Badge } from '@/elements/badge';
 import { Button } from '@/elements/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/elements/card';
 import { Label } from '@/elements/label';
+import { PATH } from '@/routers/router';
 
 // 취미 데이터 타입 정의
 interface Hobby {
@@ -308,16 +311,18 @@ const hobbies: Hobby[] = [
 ];
 
 export const HobbySelect = () => {
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const [selectedHobbies, setSelectedHobbies] = useState<string[]>([]);
-  const [, setCurrentStep] = useState(1);
 
   const { mutate } = useMutation({
-    mutationFn: (userHobbies: string[]) => updateUserHobbies('bebusl', userHobbies),
+    mutationFn: ({ userHobbies, userId }: { userHobbies: string[]; userId: string }) =>
+      updateUserHobbies(userId, userHobbies),
     onSuccess: () => {
-      console.log('성공');
+      navigate(PATH.SURVEY());
     },
     onError: () => {
-      console.log('실패');
+      //실패얼럿
     },
   });
 
@@ -350,10 +355,8 @@ export const HobbySelect = () => {
 
   // 다음 단계로 진행
   const handleSubmit = () => {
-    if (selectedHobbies.length > 0) {
-      mutate(selectedHobbies);
-      // setCurrentStep(2);
-      // console.log('선택된 취미:', selectedHobbies);
+    if (selectedHobbies.length > 0 && user) {
+      mutate({ userHobbies: selectedHobbies, userId: user.id });
     }
   };
 
