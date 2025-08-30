@@ -13,7 +13,7 @@ export const Home = () => {
   };
 
   if (showSplash) {
-    return <SplashScreen onComplete={handleSplashComplete} duration={4000} isSkipButton={true} />;
+    return <SplashScreen onComplete={handleSplashComplete} />;
   }
 
   return (
