@@ -3,12 +3,13 @@ import { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router';
 
 import { updateUserHobbies } from '@/apis/users';
+import { SurveyLayout } from '@/components/survey/SurveyLayout';
 import { useAuth } from '@/contexts/AuthContext';
 import { Badge } from '@/elements/badge';
 import { Button } from '@/elements/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/elements/card';
+import { CardDescription } from '@/elements/card';
 import { Label } from '@/elements/label';
-import { Layout } from '@/elements/layout';
+import { ShipLogo } from '@/elements/ShipLogo';
 import { PATH } from '@/routers/router';
 import { HOBBIES } from '@/utils/hobbyUtils';
 
@@ -59,66 +60,57 @@ export const HobbySelect = () => {
   };
 
   if (user?.hobbies.length) return <Navigate to={PATH.SURVEY()} />;
-
+  const isMaxSelected = selectedHobbies.length >= MAX_SELECTIONS;
   return (
-    <Layout>
+    <SurveyLayout>
       <div className="max-w-5xl mx-auto">
         {/* 헤더 */}
-        <Card className="mb-6 border-0 shadow-md bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 overflow-hidden">
-          <CardHeader className="text-center relative z-10 py-8">
-            <div className="mb-4">
-              <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br bg-white rounded-full mb-3 shadow-md">
-                <img src="/Party popper.png" alt="Party" className="w-16 h-16 object-contain" />
-              </div>
-            </div>
-            <CardTitle className="text-4xl font-bold bg-gradient-to-r from-slate-800 via-blue-800 to-purple-800 bg-clip-text text-transparent mb-3">
-              취미를 선택해주세요
-            </CardTitle>
-          </CardHeader>
-        </Card>
-
+        <div className="w-full text-center">
+          <div className="flex justify-center">
+            <ShipLogo />
+          </div>
+        </div>
+        <p className="text-center text-3xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent mb-3">
+          취미를 선택해주세요
+        </p>
         {/* 진행 상태 */}
-        <Card className="mb-6 border-0 shadow-md bg-white/80 backdrop-blur-sm">
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between mb-3">
-              <Label className="text-sm font-medium text-slate-700">
-                ({selectedHobbies.length}/{MAX_SELECTIONS}개 선택)
-                <CardDescription className="text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
-                  <span className="font-semibold text-blue-600">최소 1개에서 최대 5개까지 선택 가능</span>
-                </CardDescription>
-              </Label>
-            </div>
-            {selectedHobbies.length >= MAX_SELECTIONS && (
-              <p className="text-sm text-amber-600 mt-2 text-center">
-                최대 {MAX_SELECTIONS}개까지 선택되었습니다. 더 선택하려면 기존 선택을 해제해주세요.
-              </p>
-            )}
-          </CardContent>
-        </Card>
+        <div className={`flex items-center justify-between  ${isMaxSelected ? 'mb-0' : 'mb-3'}`}>
+          <Label className="text-sm font-medium text-slate-700">
+            ({selectedHobbies.length}/{MAX_SELECTIONS}개 선택)
+            <CardDescription className="text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
+              <span className="font-semibold text-blue-600">최소 1개에서 최대 5개까지 선택 가능</span>
+            </CardDescription>
+          </Label>
+        </div>
+        {isMaxSelected && (
+          <p className="text-sm text-amber-600 text-center mb-1">
+            최대 {MAX_SELECTIONS}개까지 선택되었습니다. 더 선택하려면 기존 선택을 해제해주세요.
+          </p>
+        )}
 
         {/* 취미 선택 그리드 */}
-        <div className="grid grid-cols-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3 mb-8">
-          {HOBBIES.map((hobby) => {
-            const isSelected = selectedHobbies.includes(hobby.id);
-            const isDisabled = !isSelected && selectedHobbies.length >= MAX_SELECTIONS;
-
-            return (
-              <Button
-                key={hobby.id}
-                variant={isSelected ? 'default' : 'outline'}
-                disabled={isDisabled}
-                data-hobby-id={hobby.id}
-                data-hobby-name={hobby.name}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  toggleHobby(hobby.id);
-                }}
-                className={`
+        <div className="mb-6 overflow-y-auto overflow-x-hidden max-h-[calc(100vh-420px)] md:max-h-full p-1">
+          <div className="grid grid-cols-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3 mb-8">
+            {HOBBIES.map((hobby) => {
+              const isSelected = selectedHobbies.includes(hobby.id);
+              const isDisabled = !isSelected && selectedHobbies.length >= MAX_SELECTIONS;
+              return (
+                <Button
+                  key={hobby.id}
+                  variant={isSelected ? 'default' : 'outline'}
+                  disabled={isDisabled}
+                  data-hobby-id={hobby.id}
+                  data-hobby-name={hobby.name}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleHobby(hobby.id);
+                  }}
+                  className={`
                     relative z-10
                     h-auto min-h-[80px] sm:min-h-[90px] md:min-h-[100px]
                     flex flex-col items-center justify-center gap-2
-                    p-3 sm:p-4
+                    p-2 sm:p-4
                     pointer-events-auto
                     cursor-pointer
                     ${
@@ -130,28 +122,24 @@ export const HobbySelect = () => {
                     }
                     transition-all duration-200
                   `}
-              >
-                <img src={hobby.icon} alt={hobby.name} className="w-10 h-10 object-contain" />
-                <div className="text-xs sm:text-sm font-medium leading-tight">{hobby.name}</div>
-                {isSelected && (
-                  <div className="w-4 h-4 rounded-full bg-white flex items-center justify-center">
-                    <span className="text-black text-xs">✓</span>
-                  </div>
-                )}
-              </Button>
-            );
-          })}
+                >
+                  <img src={hobby.icon} alt={hobby.name} className="w-10 h-10 object-contain" />
+                  <div className="text-xs sm:text-sm font-medium leading-tight">{hobby.name}</div>
+                  {isSelected && (
+                    <div className="absolute top-[-4px] right-[-4px] w-4 h-4 rounded-full bg-gradient-to-br from-white to-blue-50 shadow-md border border-blue-100/50 flex items-center justify-center transform transition-transform duration-200 group-hover:scale-110">
+                      <span className="text-blue-600 text-[10px] font-bold">✓</span>
+                    </div>
+                  )}
+                </Button>
+              );
+            })}
+          </div>
         </div>
-
         {/* 선택된 취미 미리보기 */}
         {selectedHobbies.length > 0 && (
-          <Card className="mb-6 border-0 shadow-md bg-white/80 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold text-slate-800">
-                선택된 취미 ({selectedHobbies.length}개)
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
+          <div className="mb-6">
+            <div className="text-lg font-semibold text-slate-800 mb-2">선택된 취미 ({selectedHobbies.length}개)</div>
+            <div className="flex flex-wrap gap-2">
               <div className="flex flex-wrap gap-2">
                 {selectedHobbies.map((hobbyId) => {
                   const hobby = HOBBIES.find((h) => h.id === hobbyId);
@@ -167,8 +155,8 @@ export const HobbySelect = () => {
                   );
                 })}
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         )}
 
         {/* 하단 버튼 */}
@@ -184,6 +172,6 @@ export const HobbySelect = () => {
           </Button>
         </div>
       </div>
-    </Layout>
+    </SurveyLayout>
   );
 };
