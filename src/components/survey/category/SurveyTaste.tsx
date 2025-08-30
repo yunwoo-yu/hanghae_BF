@@ -5,20 +5,14 @@ import { ProgressBar } from '@/components/survey/ProgressBar';
 import { useSurvey } from '@/components/survey/SurveyContext';
 
 export const SurveyTaste = () => {
-  const { currentQuestion, moveToNextCategory, selectQuestionAnswer, answers } = useSurvey();
+  const { currentQuestion, selectQuestionAnswer } = useSurvey();
 
   // 현재 질문 데이터 가져오기
   const currentQuestionData = tasteQuestions[currentQuestion];
 
   // 답변 선택 처리
   const handleAnswerSelect = (answer: number) => {
-    if (currentQuestion === 9) {
-      //최종 질문
-      console.log(answers);
-      moveToNextCategory();
-    } else {
-      selectQuestionAnswer(currentQuestionData.id, answer);
-    }
+    selectQuestionAnswer(currentQuestionData.id, answer);
   };
 
   // 진행률 계산

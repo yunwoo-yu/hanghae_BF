@@ -1,6 +1,7 @@
 import { CheckCircleIcon, SparklesIcon, TrophyIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
+import { useSurvey } from '@/components/survey/SurveyContext';
 import { Button } from '@/elements/button';
 import { formatTime, SURVEY_RESULT_RELEASE_TIME, SURVEY_RESULT_TIMER } from '@/utils/SurveyUtils';
 
@@ -12,7 +13,7 @@ export const SurveyComplete = () => {
     minutes: 0,
     seconds: 0,
   });
-
+  const { answers } = useSurvey();
   useEffect(() => {
     const targetDate = new Date(SURVEY_RESULT_RELEASE_TIME);
 
@@ -32,6 +33,10 @@ export const SurveyComplete = () => {
 
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    console.log('answers', answers);
+  }, [answers]);
 
   return (
     <div className="flex flex-col lg:flex-col lg:items-center lg:gap-12 xl:gap-16">

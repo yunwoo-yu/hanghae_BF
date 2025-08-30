@@ -8,7 +8,6 @@ interface SurveyState {
 
 interface SurveyContextType extends SurveyState {
   moveToNextCategory: () => void;
-  setQuestionAnswer: (questionId: number, answer: number) => void;
   selectQuestionAnswer: (questionId: number, answer: number) => void;
   answers: Record<string, number>;
 }
@@ -37,7 +36,6 @@ export const SurveyProvider = ({ children }: { children: React.ReactNode }) => {
   const moveToNextCategory = () => {
     const categories = ['personality', 'values', 'taste'];
     const currentIndex = categories.indexOf(survey.currentCategory);
-
     if (currentIndex < categories.length - 1) {
       // 다음 카테고리로 이동
       setSurvey((prev) => ({
@@ -51,18 +49,10 @@ export const SurveyProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  /** 질문 답변 입력 */
-  const setQuestionAnswer = (questionId: number, answer: number) => {
-    setAnswers((prev) => ({ ...prev, [questionId]: answer }));
-  };
-
   /**질문 답변 선택 */
   const selectQuestionAnswer = (questionId: number, answer: number) => {
     setAnswers((prev) => ({ ...prev, [questionId]: answer }));
-
-    setTimeout(() => {
-      nextQuestion();
-    }, 200);
+    nextQuestion();
   };
 
   return (
@@ -72,7 +62,6 @@ export const SurveyProvider = ({ children }: { children: React.ReactNode }) => {
         selectQuestionAnswer,
         moveToNextCategory,
         answers,
-        setQuestionAnswer,
       }}
     >
       {children}
