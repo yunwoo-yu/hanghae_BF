@@ -72,8 +72,8 @@ export const updateUserHobbies = async (
     });
 
     return { success: true, message: '취미가 성공적으로 업데이트되었습니다.' };
-  } catch () {
-    throw new Error('취미 업데이트에 실패했습니다.');
+  } catch (error) {
+    throw new Error('취미 업데이트에 실패했습니다.', error);
   }
 };
 
