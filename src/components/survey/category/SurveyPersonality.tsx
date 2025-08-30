@@ -50,10 +50,9 @@ export const SurveyPersonality = () => {
 
       {/* 오른쪽 섹션: 질문 카드 */}
       <div className="lg:flex-1 lg:max-w-2xl">
-        <Card className="bg-white/95 backdrop-blur-md border border-pink-100/50 shadow-2xl rounded-3xl lg:rounded-[2rem] overflow-hidden">
+        <Card className="bg-white/95 backdrop-blur-md border border-pink-100/50 shadow-md rounded-3xl lg:rounded-[2rem] overflow-hidden">
           {/* 카드 상단 그라디언트 */}
           <div className="h-2 bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600"></div>
-
           <CardHeader className="text-center pb-6 pt-8 sm:pt-10 md:pt-12 lg:pt-10">
             <CardTitle className="text-lg sm:text-xl md:text-2xl lg:text-xl xl:text-2xl leading-relaxed text-gray-800 px-4 font-semibold">
               {currentQuestionData.question}
