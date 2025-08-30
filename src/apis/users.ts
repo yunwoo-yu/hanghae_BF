@@ -37,23 +37,18 @@ export interface RankingResult {
 
 // 1. 간단 인증용 - ID와 이름으로 사용자 찾기
 export const authenticateUser = async (userId: string, name: string): Promise<AuthResult> => {
-  try {
-    const userDoc = doc(db, 'users', userId);
-    const userSnapshot = await getDoc(userDoc);
+  const userDoc = doc(db, 'users', userId);
+  const userSnapshot = await getDoc(userDoc);
 
-    if (!userSnapshot.exists()) {
-      return { success: false, message: '사용자를 찾을 수 없습니다.' };
-    }
+  if (!userSnapshot.exists()) {
+    throw Error('사용자를 찾을 수 없습니다.');
+  }
 
-    const userData = userSnapshot.data();
-    if (userData.name === name) {
-      return { success: true, user: { id: userId, ...userData } as User };
-    } else {
-      return { success: false, message: '이름이 일치하지 않습니다.' };
-    }
-  } catch (error) {
-    console.error('Authentication error:', error);
-    return { success: false, message: '인증 중 오류가 발생했습니다.' };
+  const userData = userSnapshot.data();
+  if (userData.name === name) {
+    return { success: true, user: { id: userId, ...userData } as User };
+  } else {
+    throw Error('이름이 일치하지 않습니다.');
   }
 };
 
@@ -77,8 +72,7 @@ export const updateUserHobbies = async (
     });
 
     return { success: true, message: '취미가 성공적으로 업데이트되었습니다.' };
-  } catch (error) {
-    console.error('Error updating hobbies:', error);
+  } catch () {
     throw new Error('취미 업데이트에 실패했습니다.');
   }
 };
