@@ -1,4 +1,4 @@
-import shipSvg from '@/assets/survey/ship.svg';
+import shipSvg from '@/assets/images/survey/ship.svg';
 
 export const ShipLogo = () => {
   return (

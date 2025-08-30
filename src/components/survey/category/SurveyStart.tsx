@@ -5,7 +5,7 @@ import { useSurvey } from '@/components/survey/SurveyContext';
 import { Button } from '@/elements/button';
 import { ShipLogo } from '@/elements/ShipLogo';
 import type { SurveyCategory } from '@/types/survey';
-import { SURVEY_CARDS } from '@/utils/SurveyUtils';
+import { SURVEY_CARDS } from '@/utils/surveyUtils';
 
 export const SurveyStart = () => {
   const { moveToNextCategory } = useSurvey();

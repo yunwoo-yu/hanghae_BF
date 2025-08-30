@@ -4,7 +4,7 @@ import personalityQuestions from '@/assets/questions/personality.json';
 import { ProgressBar } from '@/components/survey/ProgressBar';
 import { useSurvey } from '@/components/survey/SurveyContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/elements/card';
-import { SURVEY_PERSONALITY_OPTIONS } from '@/utils/SurveyUtils';
+import { SURVEY_PERSONALITY_OPTIONS } from '@/utils/surveyUtils';
 
 export const SurveyPersonality = () => {
   const { currentQuestion, selectQuestionAnswer } = useSurvey();

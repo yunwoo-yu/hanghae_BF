@@ -2,7 +2,7 @@ import { CheckCircleIcon, SparklesIcon, TrophyIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { Button } from '@/elements/button';
-import { formatTime, SURVEY_RESULT_RELEASE_TIME, SURVEY_RESULT_TIMER } from '@/utils/SurveyUtils';
+import { formatTime, SURVEY_RESULT_RELEASE_TIME, SURVEY_RESULT_TIMER } from '@/utils/surveyUtils';
 
 export const SurveyComplete = () => {
   /** 설문 결과 발표 시간 */

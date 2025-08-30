@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import { Button } from '@/elements/button';
 import { Card, CardContent } from '@/elements/card';
+import { ROLLING_PAPER_IMAGES } from '@/utils/rollingUtils';
 
 import type { IRollingPaper } from '../../pages/RollingList';
 
@@ -51,11 +52,7 @@ export const RollingPapers = ({ rollingPapers }: IRollingPapersProps) => {
                 onClick={() => openModal(paper.id)}
               >
                 <CardContent className="p-0">
-                  <img
-                    src={`/images/rolling/rolling_paper_${(paper.id % 6) + 1}.png`}
-                    alt="롤링페이퍼 배경"
-                    className="w-full h-auto"
-                  />
+                  <img src={ROLLING_PAPER_IMAGES[paper.id % 6]} alt="롤링페이퍼 배경" className="w-full h-auto" />
                   <div className="absolute inset-0 p-6">
                     <h3 className="font-semibold text-card-foreground text-lg mt-4 sm:mt-8">{paper.author}</h3>
                     <p className="text-card-foreground line-clamp-4 sm:line-clamp-8 lg:line-clamp-4 leading-relaxed mt-1 sm:mt-3">
