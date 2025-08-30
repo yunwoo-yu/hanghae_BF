@@ -1,16 +1,18 @@
+import { useQuery } from '@tanstack/react-query';
 import { ChevronRight, MousePointerClick, PencilLine } from 'lucide-react';
 import { Link, useParams } from 'react-router';
 
-import cloverSvg from '@/assets/images/result/clover.svg';
+import { getUser } from '@/apis/users';
+import cloverSvg from '@/assets/result/clover.svg';
 import { MatchingDialog } from '@/components/MatchingDialog';
 import TopThree from '@/components/result/TopThree';
-import usersRawData from '@/data/users.json';
 import { Avatar, AvatarFallback, AvatarImage } from '@/elements/avatar';
 import { Badge } from '@/elements/badge';
 import { Button } from '@/elements/button';
 import { Card, CardContent, CardHeader } from '@/elements/card';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/elements/tooltip';
-import { findUserById } from '@/utils/UserUtils';
+import { HOBBIES } from '@/utils/hobbyUtils';
+
 type UserData = {
   name: string;
   github: string;
@@ -18,10 +20,20 @@ type UserData = {
   hobbies: string[];
 };
 
+const mapHobbyIdsToNames = (id: string) => {
+  const matchedHobby = HOBBIES.find((hobby) => hobby.id === id);
+  return matchedHobby ? matchedHobby.name : '';
+};
+
 export const ResultDetail = () => {
   const { id } = useParams();
 
-  const userData = findUserById(usersRawData, id);
+  const { data: userData } = useQuery({
+    queryKey: ['user', id],
+    queryFn: () => getUser(id!),
+    select: (res) => res.data,
+    enabled: !!id,
+  });
 
   const best5: Omit<UserData, 'hobbies'>[] = getBest5User();
   const worst5: Omit<UserData, 'hobbies'>[] = getWorst5User();
@@ -55,9 +67,8 @@ export const ResultDetail = () => {
                     </Tooltip>
                     <p className="text-xs text-gray-500">{user.github}</p>
                   </div>
-                  {/* <Button className="bg-transparent shadow-none cursor-pointer hover:bg-transparent "> */}
+
                   <ChevronRight size={20} stroke="#303030" />
-                  {/* </Button> */}
                 </li>
               );
             }}
@@ -66,6 +77,8 @@ export const ResultDetail = () => {
       </ul>
     );
   };
+
+  if (!userData) return null;
 
   return (
     <div className="space-y-4 p-8 min-h-dvh bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
@@ -95,9 +108,9 @@ export const ResultDetail = () => {
           </div>
 
           <div className="mt-2">
-            {userData.hobbies.map((hobby) => (
+            {userData.hobbies?.map((hobby: string) => (
               <Badge key={`${userData.id}-${hobby}`} className="bg-gray-700 mr-2">
-                {hobby}
+                {mapHobbyIdsToNames(hobby)}
               </Badge>
             ))}
           </div>

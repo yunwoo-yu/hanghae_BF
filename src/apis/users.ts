@@ -44,6 +44,18 @@ export const getAllUsers = async () => {
   }, {});
 };
 
+export const getUser = async (userId: string) => {
+  const userDoc = doc(db, 'users', userId);
+  const userSnapshot = await getDoc(userDoc);
+
+  if (!userSnapshot.exists()) {
+    throw Error('사용자를 찾을 수 없습니다.');
+  }
+
+  const userData = userSnapshot.data() as Omit<User, 'id'>;
+  return { success: true, data: { id: userId, ...userData } };
+};
+
 // 1. 간단 인증용 - ID와 이름으로 사용자 찾기
 export const authenticateUser = async (userId: string, name: string): Promise<AuthResult> => {
   const userDoc = doc(db, 'users', userId);
