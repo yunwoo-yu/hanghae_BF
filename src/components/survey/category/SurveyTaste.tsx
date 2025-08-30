@@ -3,7 +3,6 @@ import { UtensilsIcon } from 'lucide-react';
 import tasteQuestions from '@/assets/questions/taste.json';
 import { ProgressBar } from '@/components/survey/ProgressBar';
 import { useSurvey } from '@/components/survey/SurveyContext';
-import { Card, CardContent, CardHeader, CardTitle } from '@/elements/card';
 
 export const SurveyTaste = () => {
   const { currentQuestion, moveToNextCategory, selectQuestionAnswer, answers } = useSurvey();
@@ -40,59 +39,38 @@ export const SurveyTaste = () => {
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-3xl xl:text-4xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent mb-3 lg:mb-4">
             입맛 분석
           </h1>
-          <div className="inline-flex items-center justify-center bg-red-50 border border-red-200 rounded-full px-4 py-2 mb-4 lg:mb-6">
-            <p className="text-red-700 text-sm sm:text-base md:text-lg lg:text-base font-semibold">
-              {currentQuestion + 1}/10 문항
-            </p>
-          </div>
-        </div>
-
-        {/* 진행률 표시 */}
-        <div className="mb-8 lg:mb-0">
-          <ProgressBar currentQuestion={currentQuestion} progress={progress} />
         </div>
       </div>
 
       {/* 오른쪽 섹션: 질문 카드 */}
       <div className="lg:flex-1 lg:max-w-2xl">
-        <Card className="bg-white/95 backdrop-blur-md border border-red-100/50 shadow-2xl rounded-3xl lg:rounded-[2rem] overflow-hidden">
-          {/* 카드 상단 그라디언트 */}
-          <div className="h-2 bg-gradient-to-r from-red-400 via-red-500 to-red-600"></div>
+        {/* 진행률 표시 */}
+        <div className="mb-8 lg:mb-0">
+          <ProgressBar currentQuestion={currentQuestion} progress={progress} surveyType="taste" />
+        </div>
+        <div className="text-center pb-6 pt-4 md:pt-8 sm:pt-10 md:pt-12 lg:pt-10">
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-xl xl:text-2xl leading-relaxed text-gray-800 px-4 font-semibold">
+            어떤 음식을 더 좋아하시나요?
+          </p>
+        </div>
+        <div className="grid grid-cols-1 gap-2 md:gap-3 sm:gap-4 md:gap-5 lg:gap-4">
+          {currentQuestionData.choices.map((option, index) => (
+            <div
+              key={option}
+              className="group cursor-pointer transition-all duration-500 hover:scale-[1.02] border-2 border-red-100 hover:border-red-300 p-4 sm:p-5 md:p-6 lg:p-5 rounded-2xl shadow-sm hover:shadow-xl bg-gradient-to-r from-white to-red-50/50 hover:from-red-50 hover:to-red-100 relative overflow-hidden"
+              onClick={() => handleAnswerSelect(index + 1)}
+            >
+              {/* 호버 시 배경 애니메이션 */}
+              <div className="absolute inset-0 bg-gradient-to-r from-red-500/0 to-red-600/0 group-hover:from-red-500/5 group-hover:to-red-600/5 transition-all duration-500"></div>
 
-          <CardHeader className="text-center pb-6 pt-8 sm:pt-10 md:pt-12 lg:pt-10">
-            <CardTitle className="text-lg sm:text-xl md:text-2xl lg:text-xl xl:text-2xl leading-relaxed text-gray-800 px-4 font-semibold">
-              어떤 음식을 더 좋아하시나요?
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="pb-8 sm:pb-10 md:pb-12 lg:pb-10 px-6 sm:px-8">
-            {/* 택1 답변 옵션 */}
-            <div className="grid grid-cols-1 gap-3 sm:gap-4 md:gap-5 lg:gap-4">
-              {currentQuestionData.choices.map((option, index) => (
-                <div
-                  key={option}
-                  className="group cursor-pointer transition-all duration-500 hover:scale-[1.02] border-2 border-red-100 hover:border-red-300 p-4 sm:p-5 md:p-6 lg:p-5 rounded-2xl shadow-sm hover:shadow-xl bg-gradient-to-r from-white to-red-50/50 hover:from-red-50 hover:to-red-100 relative overflow-hidden"
-                  onClick={() => handleAnswerSelect(index + 1)}
-                >
-                  {/* 호버 시 배경 애니메이션 */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-red-500/0 to-red-600/0 group-hover:from-red-500/5 group-hover:to-red-600/5 transition-all duration-500"></div>
-
-                  <div className="relative flex items-center justify-between">
-                    <div className="text-sm sm:text-base md:text-lg lg:text-base font-semibold text-gray-700 group-hover:text-red-700 flex-1 text-center">
-                      {option}
-                    </div>
-
-                    {/* A, B 표시 */}
-                    <div className="w-8 h-8 bg-red-100 group-hover:bg-red-200 rounded-full flex items-center justify-center ml-3 transition-all duration-300">
-                      <span className="text-red-600 group-hover:text-red-700 font-bold text-sm">
-                        {String.fromCharCode(65 + index)}
-                      </span>
-                    </div>
-                  </div>
+              <div className="relative flex items-center justify-between">
+                <div className="text-sm sm:text-base md:text-lg lg:text-base font-semibold text-gray-700 group-hover:text-red-700 flex-1 text-center">
+                  {option}
                 </div>
-              ))}
+              </div>
             </div>
-          </CardContent>
-        </Card>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import { CheckCircleIcon, SparklesIcon, TrophyIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { Button } from '@/elements/button';
-import { formatTime, SURVEY_RESULT_RELEASE_TIME, SURVEY_RESULT_TIMER } from '@/utils/surveyUtils';
+import { formatTime, SURVEY_RESULT_RELEASE_TIME, SURVEY_RESULT_TIMER } from '@/utils/SurveyUtils';
 
 export const SurveyComplete = () => {
   /** 설문 결과 발표 시간 */
@@ -34,10 +34,10 @@ export const SurveyComplete = () => {
   }, []);
 
   return (
-    <div className="flex flex-col lg:flex-row lg:items-center lg:gap-12 xl:gap-16">
+    <div className="flex flex-col lg:flex-col lg:items-center lg:gap-12 xl:gap-16">
       {/* 왼쪽 섹션: 완료 아이콘 + 텍스트 */}
-      <div className="lg:flex-1 lg:text-left">
-        <div className="text-center lg:text-left mb-8 lg:mb-0 relative">
+      <div className="flex-1 text-center">
+        <div className="text-center flex flex-col items-center justify-center mb-8 lg:mb-0 relative">
           {/* 배경 장식 */}
           <div className="absolute -top-4 -left-4 lg:-left-8">
             <SparklesIcon className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400 animate-pulse" />
@@ -66,14 +66,12 @@ export const SurveyComplete = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-emerald-600 via-green-600 to-emerald-700 bg-clip-text text-transparent mb-4 lg:mb-6 leading-tight">
             설문조사 완료!
           </h2>
-          <p className="text-gray-600 text-lg sm:text-xl md:text-2xl lg:text-xl font-medium">
-            소중한 답변 감사합니다 ✨
-          </p>
+          <p className="text-gray-600 text-lg sm:text-xl md:text-2xl lg:text-xl font-medium">소중한 답변 감사합니다</p>
         </div>
       </div>
 
       {/* 오른쪽 섹션: 카운트다운 + 버튼 */}
-      <div className="lg:flex-1 lg:max-w-lg xl:max-w-xl">
+      <div className="flex-1 max-w-xl w-full">
         {/* 결과 공개 카운트다운 */}
         <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-3xl lg:rounded-[2rem] p-6 sm:p-7 md:p-8 lg:p-6 xl:p-8 mb-8 border border-blue-100/50 shadow-2xl backdrop-blur-sm relative overflow-hidden">
           {/* 장식적 배경 */}
@@ -110,7 +108,7 @@ export const SurveyComplete = () => {
 
         {/* 다시하기 버튼 */}
         <Button
-          className="w-full cursor-pointer bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 hover:from-blue-600 hover:via-indigo-600 hover:to-purple-600 text-white font-bold text-lg sm:text-xl md:text-2xl lg:text-xl py-4 sm:py-5 md:py-6 lg:py-4 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300 rounded-2xl"
+          className="w-full max-w-md cursor-pointer bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 hover:from-blue-600 hover:via-indigo-600 hover:to-purple-600 text-white font-bold text-lg sm:text-xl md:text-xl py-4 sm:py-5 md:py-6 lg:py-4 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300 rounded-2xl"
           size="lg"
         >
           <SparklesIcon className="w-5 h-5 mr-2" />

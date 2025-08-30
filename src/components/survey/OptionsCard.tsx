@@ -1,7 +1,7 @@
 import { twMerge } from 'tailwind-merge';
 
 import type { SurveyCategory } from '@/types/survey';
-import { SURVEY_CARDS } from '@/utils/surveyUtils';
+import { SURVEY_CARDS } from '@/utils/SurveyUtils';
 
 export const OptionsCard = ({ category }: { category: SurveyCategory }) => {
   return (
