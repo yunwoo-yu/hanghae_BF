@@ -1,6 +1,6 @@
-import brainSvg from '@/assets/survey/brain.svg';
-import foodSvg from '@/assets/survey/food.svg';
-import hmmSvg from '@/assets/survey/hmm.svg';
+import brainSvg from '@/assets/images/survey/brain.svg';
+import foodSvg from '@/assets/images/survey/food.svg';
+import hmmSvg from '@/assets/images/survey/hmm.svg';
 
 /** 설문 카드 */
 export const SURVEY_CARDS = {

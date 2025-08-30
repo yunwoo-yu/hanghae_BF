@@ -1,7 +1,8 @@
-import shipSvg from '@/assets/survey/ship.svg';
+import shipSvg from '@/assets/images/survey/ship.svg';
+
 export const ShipLogo = () => {
   return (
-    <div className="relative inline-block p-4 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full mb-6 shadow-lg overflow-hidden">
+    <div className="relative inline-block p-4 sm:p-5 md:p-6 lg:p-5 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full mb-6 sm:mb-8 md:mb-10 lg:mb-8 shadow-lg overflow-hidden">
       {/* 메인 파도 - 물결 확실하게 */}
       <div className="absolute bottom-0 left-0 right-0 h-40">
         <svg className="w-full h-full" viewBox="0 0 64 160" preserveAspectRatio="none">
@@ -47,7 +48,11 @@ export const ShipLogo = () => {
         </svg>
       </div>
 
-      <img src={shipSvg} alt="항해 배" className="relative z-10 w-16 h-16 mx-auto" />
+      <img
+        src={shipSvg}
+        alt="항해 배"
+        className="relative z-10 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-20 lg:h-20 mx-auto"
+      />
     </div>
   );
 };
