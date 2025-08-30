@@ -145,4 +145,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  .font-PyeongchangPeace {
+    font-family: 'PyeongchangPeace', sans-serif;
+  }
 }
