@@ -1,4 +1,4 @@
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, updateDoc } from 'firebase/firestore';
 
 import { db } from '@/lib/firebase';
 
@@ -35,6 +35,15 @@ export interface RankingResult {
   message?: string;
 }
 
+export const getAllUsers = async () => {
+  const snap = await getDocs(collection(db, 'users'));
+
+  return snap.docs.reduce<Record<string, User>>((acc, curDoc) => {
+    acc[curDoc.id] = curDoc.data() as User;
+    return acc;
+  }, {});
+};
+
 // 1. 간단 인증용 - ID와 이름으로 사용자 찾기
 export const authenticateUser = async (userId: string, name: string): Promise<AuthResult> => {
   const userDoc = doc(db, 'users', userId);
@@ -57,24 +66,20 @@ export const updateUserHobbies = async (
   userId: string,
   hobbies: string[]
 ): Promise<{ success: boolean; message: string }> => {
-  try {
-    const userDoc = doc(db, 'users', userId);
+  const userDoc = doc(db, 'users', userId);
 
-    // 문서 존재 여부 확인
-    const userSnapshot = await getDoc(userDoc);
-    if (!userSnapshot.exists()) {
-      throw new Error('사용자를 찾을 수 없습니다.');
-    }
-
-    await updateDoc(userDoc, {
-      hobbies: hobbies,
-      updatedAt: new Date().toISOString(),
-    });
-
-    return { success: true, message: '취미가 성공적으로 업데이트되었습니다.' };
-  } catch (error) {
-    throw new Error('취미 업데이트에 실패했습니다.', error);
+  // 문서 존재 여부 확인
+  const userSnapshot = await getDoc(userDoc);
+  if (!userSnapshot.exists()) {
+    throw new Error('사용자를 찾을 수 없습니다.');
   }
+
+  await updateDoc(userDoc, {
+    hobbies: hobbies,
+    updatedAt: new Date().toISOString(),
+  });
+
+  return { success: true, message: '취미가 성공적으로 업데이트되었습니다.' };
 };
 
 // // 3. 사용자별 궁합 점수 저장
