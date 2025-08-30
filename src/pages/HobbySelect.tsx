@@ -8,6 +8,7 @@ import { Badge } from '@/elements/badge';
 import { Button } from '@/elements/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/elements/card';
 import { Label } from '@/elements/label';
+import { Layout } from '@/elements/layout';
 import { PATH } from '@/routers/router';
 
 // 취미 데이터 타입 정의
@@ -361,7 +362,7 @@ export const HobbySelect = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-4">
+    <Layout>
       <div className="max-w-lg mx-auto">
         {/* 헤더 */}
         <Card className="mb-6 border-0 shadow-md bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 overflow-hidden">
@@ -485,6 +486,6 @@ export const HobbySelect = () => {
           </Button>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
