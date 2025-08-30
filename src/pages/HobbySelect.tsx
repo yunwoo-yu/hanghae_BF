@@ -1,5 +1,7 @@
+import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 
+import { updateUserHobbies } from '@/apis/users';
 import { Badge } from '@/elements/badge';
 import { Button } from '@/elements/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/elements/card';
@@ -309,6 +311,16 @@ export const HobbySelect = () => {
   const [selectedHobbies, setSelectedHobbies] = useState<string[]>([]);
   const [, setCurrentStep] = useState(1);
 
+  const { mutate } = useMutation({
+    mutationFn: (userHobbies: string[]) => updateUserHobbies('bebusl', userHobbies),
+    onSuccess: () => {
+      console.log('성공');
+    },
+    onError: () => {
+      console.log('실패');
+    },
+  });
+
   // 최대 선택 개수 상수
   const MAX_SELECTIONS = 5;
 
@@ -337,10 +349,11 @@ export const HobbySelect = () => {
   const allHobbies = hobbies;
 
   // 다음 단계로 진행
-  const handleNext = () => {
+  const handleSubmit = () => {
     if (selectedHobbies.length > 0) {
-      setCurrentStep(2);
-      console.log('선택된 취미:', selectedHobbies);
+      mutate(selectedHobbies);
+      // setCurrentStep(2);
+      // console.log('선택된 취미:', selectedHobbies);
     }
   };
 
@@ -459,7 +472,7 @@ export const HobbySelect = () => {
         <Card className="border-0 shadow-md bg-white/80 backdrop-blur-sm">
           <CardContent className="pt-6">
             <div className="flex justify-center items-center">
-              <Button onClick={handleNext} disabled={selectedHobbies.length === 0} size="lg" className="px-8">
+              <Button onClick={handleSubmit} disabled={selectedHobbies.length === 0} size="lg" className="px-8">
                 완료
               </Button>
             </div>
