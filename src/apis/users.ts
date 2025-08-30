@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, updateDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
 
 import { db } from '@/lib/firebase';
 
@@ -94,25 +94,50 @@ export const getUser = async (userId: string) => {
   return { success: true, data: { id: userId, ...userData } };
 };
 
-// // 3. 사용자별 궁합 점수 저장
-// export async function saveCompatibilityScores(
-//   userId: string,
-//   scores: Record<string, number>
-// ): Promise<{ success: boolean; message: string }> {
-//   try {
-//     const userDoc = doc(db, 'users', userId);
+// 3. 설문 답변 저장
+export async function saveSurveyAnswers(
+  userId: string,
+  answers: Record<string, number>
+): Promise<{ success: boolean; message: string }> {
+  try {
+    // 답변을 카테고리별로 분류
+    const categorizedAnswers = Object.entries(answers).reduce(
+      (acc, [questionNum, value]) => {
+        const num = parseInt(questionNum);
+        if (num <= 10) {
+          acc.personality.push(value);
+        } else if (num <= 20) {
+          acc.taste.push(value);
+        } else if (num <= 30) {
+          acc.values.push(value);
+        }
+        return acc;
+      },
+      { personality: [] as number[], taste: [] as number[], values: [] as number[] }
+    );
 
-//     await updateDoc(userDoc, {
-//       compatibilityScores: scores,
-//       scoresUpdatedAt: new Date().toISOString(),
-//     });
+    const surveyDoc = doc(db, 'survey', userId);
+    await updateDoc(surveyDoc, {
+      ...categorizedAnswers,
+      updatedAt: new Date().toISOString(),
+    }).catch(async (error) => {
+      if (error.code === 'not-found') {
+        // 문서가 없는 경우 새로 생성
+        await setDoc(surveyDoc, {
+          ...categorizedAnswers,
+          updatedAt: new Date().toISOString(),
+        });
+      } else {
+        throw error;
+      }
+    });
 
-//     return { success: true, message: '궁합 점수가 저장되었습니다.' };
-//   } catch (error) {
-//     console.error('Error saving compatibility scores:', error);
-//     throw new Error('궁합 점수 저장에 실패했습니다.');
-//   }
-// }
+    return { success: true, message: '설문 답변이 저장되었습니다.' };
+  } catch (error) {
+    console.error('Error saving survey answers:', error);
+    throw new Error('설문 답변 저장에 실패했습니다.');
+  }
+}
 
 // // 4. Top5/Worst5 가져오기
 // export async function getCompatibilityRanking(userId: string): Promise<RankingResult> {

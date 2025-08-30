@@ -1,7 +1,10 @@
+import { useMutation } from '@tanstack/react-query';
 import { CheckCircleIcon, SparklesIcon, TrophyIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
+import { saveSurveyAnswers } from '@/apis/users';
 import { useSurvey } from '@/components/survey/SurveyContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/elements/button';
 import { formatTime, SURVEY_RESULT_RELEASE_TIME, SURVEY_RESULT_TIMER } from '@/utils/SurveyUtils';
 
@@ -14,6 +17,18 @@ export const SurveyComplete = () => {
     seconds: 0,
   });
   const { answers } = useSurvey();
+  const { user } = useAuth();
+
+  const { mutate } = useMutation({
+    mutationFn: () => saveSurveyAnswers(user?.id ?? '', answers),
+    onSuccess: () => {
+      console.log('success', answers);
+    },
+    onError: () => {
+      console.log('error');
+    },
+  });
+
   useEffect(() => {
     const targetDate = new Date(SURVEY_RESULT_RELEASE_TIME);
 
@@ -35,8 +50,11 @@ export const SurveyComplete = () => {
   }, []);
 
   useEffect(() => {
-    console.log('answers', answers);
-  }, [answers]);
+    if (user?.id && Object.keys(answers).length > 0) {
+      console.log('Sending answers:', answers);
+      mutate();
+    }
+  }, [user?.id, answers]);
 
   return (
     <div className="flex flex-col lg:flex-col lg:items-center lg:gap-12 xl:gap-16">
