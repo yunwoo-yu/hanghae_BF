@@ -10,6 +10,7 @@ interface SurveyContextType extends SurveyState {
   moveToNextCategory: () => void;
   selectQuestionAnswer: (questionId: number, answer: number) => void;
   answers: Record<string, number>;
+  resetSurvey: () => void;
 }
 
 const SurveyContext = createContext<SurveyContextType | undefined>(undefined);
@@ -55,12 +56,18 @@ export const SurveyProvider = ({ children }: { children: React.ReactNode }) => {
     nextQuestion();
   };
 
+  const resetSurvey = () => {
+    setSurvey({ currentCategory: 'start', currentQuestion: 0, isCompleted: false });
+    setAnswers({});
+  };
+
   return (
     <SurveyContext.Provider
       value={{
         ...survey,
         selectQuestionAnswer,
         moveToNextCategory,
+        resetSurvey,
         answers,
       }}
     >
