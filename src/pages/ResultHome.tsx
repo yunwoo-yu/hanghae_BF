@@ -3,7 +3,7 @@ import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router';
 
 import { getAllUsers } from '@/apis/users';
-import cloverSvg from '@/assets/result/clover.svg';
+import cloverSvg from '@/assets/images/result/clover.svg';
 import { useAuth } from '@/contexts/AuthContext';
 import { Avatar, AvatarFallback, AvatarImage } from '@/elements/avatar';
 import { convertRawDataToUsers } from '@/utils/UserUtils';

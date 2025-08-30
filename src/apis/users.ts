@@ -6,11 +6,9 @@ import { db } from '@/lib/firebase';
 export interface User {
   id: string;
   name: string;
-  image?: string;
-  link?: string;
-  hobbies?: string[];
-  compatibilityScores?: Record<string, number>;
-  scoresUpdatedAt?: string;
+  image: string;
+  link: string;
+  hobbies: string[];
   updatedAt?: string;
 }
 
@@ -34,27 +32,6 @@ export interface RankingResult {
   };
   message?: string;
 }
-
-export const getAllUsers = async () => {
-  const snap = await getDocs(collection(db, 'users'));
-
-  return snap.docs.reduce<Record<string, User>>((acc, curDoc) => {
-    acc[curDoc.id] = curDoc.data() as User;
-    return acc;
-  }, {});
-};
-
-export const getUser = async (userId: string) => {
-  const userDoc = doc(db, 'users', userId);
-  const userSnapshot = await getDoc(userDoc);
-
-  if (!userSnapshot.exists()) {
-    throw Error('사용자를 찾을 수 없습니다.');
-  }
-
-  const userData = userSnapshot.data() as Omit<User, 'id'>;
-  return { success: true, data: { id: userId, ...userData } };
-};
 
 // 1. 간단 인증용 - ID와 이름으로 사용자 찾기
 export const authenticateUser = async (userId: string, name: string): Promise<AuthResult> => {
@@ -92,6 +69,29 @@ export const updateUserHobbies = async (
   });
 
   return { success: true, message: '취미가 성공적으로 업데이트되었습니다.' };
+};
+
+//3. 모든 유저 가져오기
+export const getAllUsers = async () => {
+  const snap = await getDocs(collection(db, 'users'));
+
+  return snap.docs.reduce<Record<string, User>>((acc, curDoc) => {
+    acc[curDoc.id] = curDoc.data() as User;
+    return acc;
+  }, {});
+};
+
+//4. 유저 가져오기
+export const getUser = async (userId: string) => {
+  const userDoc = doc(db, 'users', userId);
+  const userSnapshot = await getDoc(userDoc);
+
+  if (!userSnapshot.exists()) {
+    throw Error('사용자를 찾을 수 없습니다.');
+  }
+
+  const userData = userSnapshot.data() as Omit<User, 'id'>;
+  return { success: true, data: { id: userId, ...userData } };
 };
 
 // // 3. 사용자별 궁합 점수 저장
