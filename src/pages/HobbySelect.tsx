@@ -309,8 +309,6 @@ const hobbies: Hobby[] = [
 
 export const HobbySelect = () => {
   const [selectedHobbies, setSelectedHobbies] = useState<string[]>([]);
-  const [, setCurrentStep] = useState(1);
-
   const { mutate } = useMutation({
     mutationFn: (userHobbies: string[]) => updateUserHobbies('bebusl', userHobbies),
     onSuccess: () => {
@@ -359,13 +357,13 @@ export const HobbySelect = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-4">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-lg mx-auto">
         {/* 헤더 */}
-        <Card className="mb-6 border-0 shadow-xl bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 overflow-hidden">
+        <Card className="mb-6 border-0 shadow-md bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-100/20 via-indigo-100/20 to-purple-100/20"></div>
           <CardHeader className="text-center relative z-10 py-8">
             <div className="mb-4">
-              <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br bg-white rounded-full mb-3 shadow-lg">
+              <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br bg-white rounded-full mb-3 shadow-md">
                 <img src="/Party popper.png" alt="Party" className="w-16 h-16 object-contain" />
               </div>
             </div>
@@ -421,10 +419,10 @@ export const HobbySelect = () => {
                     cursor-pointer
                     ${
                       isSelected
-                        ? 'bg-gray-700 text-white shadow-lg scale-105'
+                        ? 'bg-gray-700 text-white shadow-lg scale-102'
                         : isDisabled
                           ? 'opacity-50 cursor-not-allowed bg-white'
-                          : 'bg-white hover:bg-gray-50 hover:scale-105 hover:shadow-md'
+                          : 'bg-white hover:bg-gray-50 hover:scale-102 hover:shadow-md'
                     }
                     transition-all duration-200
                   `}
@@ -470,15 +468,17 @@ export const HobbySelect = () => {
         )}
 
         {/* 하단 버튼 */}
-        <Card className="border-0 shadow-md bg-white/80 backdrop-blur-sm">
-          <CardContent className="pt-6">
-            <div className="flex justify-center items-center">
-              <Button onClick={handleSubmit} disabled={selectedHobbies.length === 0} size="lg" className="px-8">
-                완료
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+
+        <div className="flex justify-center items-center md:justify-end">
+          <Button
+            onClick={handleSubmit}
+            disabled={selectedHobbies.length === 0}
+            size="lg"
+            className="px-8 w-full md:w-1/3 "
+          >
+            완료
+          </Button>
+        </div>
       </div>
     </div>
   );
