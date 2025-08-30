@@ -19,7 +19,7 @@ export const PATH = {
   RESULT_DETAIL: () => '/result/:id',
   SURVEY: () => '/survey',
   HOBBY_SELECT: () => '/hobby-select',
-  NOT_FOUND: () => '/not-found',
+  NOT_FOUND: () => '*',
 };
 
 const router = createBrowserRouter([

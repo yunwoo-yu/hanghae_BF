@@ -1,9 +1,18 @@
 import { Heart, Sparkles, Star, Zap } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+import { twMerge } from 'tailwind-merge';
+
+import { getParticleColor } from '@/utils/particleUtils';
 
 export const Splash = () => {
+  const navigate = useNavigate();
   const [stage, setStage] = useState(0);
   const [showRipple, setShowRipple] = useState(false);
+
+  const handleStart = () => {
+    navigate('/login');
+  };
 
   useEffect(() => {
     const timers = [
@@ -17,10 +26,9 @@ export const Splash = () => {
     return () => timers.forEach(clearTimeout);
   }, []);
 
-  // 고래 이미지 대신 하트 아이콘으로 대체
-  const WhaleIcon = () => (
+  const HeartIcon = () => (
     <div className="relative">
-      <Heart className="w-20 h-20 sm:w-24 sm:h-24 text-blue-500 fill-blue-500 drop-shadow-xl" />
+      <Heart className="w-20 h-20 sm:w-24 sm:h-24 fill text-blue-400 fill-blue-400 drop-shadow-xl" />
       <div className="absolute -top-2 -right-2">
         <div className="w-4 h-4 bg-pink-400 rounded-full animate-pulse" />
       </div>
@@ -36,7 +44,7 @@ export const Splash = () => {
       <div className="absolute inset-0">
         {/* 회전하는 그라데이션 배경 */}
         <div
-          className={`absolute inset-0 bg-gradient-conic from-purple-500 via-pink-500 via-blue-500 to-purple-500 opacity-20 transition-all duration-2000 ${
+          className={`absolute inset-0 bg-gradient-conic from-purple-500 to-purple-500 opacity-20 transition-all duration-2000 ${
             stage >= 1 ? 'animate-spin-slow scale-150' : 'scale-100'
           }`}
         />
@@ -60,19 +68,7 @@ export const Splash = () => {
               animationDuration: `${2 + Math.random() * 3}s`,
             }}
           >
-            <div
-              className={`w-1 h-1 sm:w-2 sm:h-2 rounded-full animate-twinkle ${
-                i % 5 === 0
-                  ? 'bg-yellow-300'
-                  : i % 5 === 1
-                    ? 'bg-pink-300'
-                    : i % 5 === 2
-                      ? 'bg-blue-300'
-                      : i % 5 === 3
-                        ? 'bg-purple-300'
-                        : 'bg-green-300'
-              }`}
-            />
+            <div className={twMerge(`w-1 h-1 sm:w-2 sm:h-2 rounded-full animate-twinkle`, getParticleColor(i))} />
           </div>
         ))}
 
@@ -123,7 +119,7 @@ export const Splash = () => {
               } ${stage >= 3 ? 'animate-bounce-gentle' : ''}`}
             >
               <div className={`transition-all duration-1000 ${stage >= 2 ? 'scale-110' : 'scale-100'}`}>
-                <WhaleIcon />
+                <HeartIcon />
               </div>
             </div>
 
@@ -169,7 +165,10 @@ export const Splash = () => {
             stage >= 4 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
           }`}
         >
-          <button className="group relative px-8 py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 rounded-full text-white font-bold text-lg shadow-2xl hover:shadow-pink-500/50 transition-all duration-300 hover:scale-105 hover:-translate-y-1 overflow-hidden">
+          <button
+            onClick={handleStart}
+            className="group relative px-8 py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 rounded-full text-white font-bold text-lg shadow-2xl hover:shadow-pink-500/50 transition-all duration-300 hover:scale-105 hover:-translate-y-1 overflow-hidden"
+          >
             <div className="absolute inset-0 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
             <span className="relative z-10">시작하기 ✨</span>

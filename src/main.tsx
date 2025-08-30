@@ -1,5 +1,6 @@
-import './styles/font.css';
-import './styles/globals.css';
+import '@/styles/animation.css';
+import '@/styles/font.css';
+import '@/styles/globals.css';
 
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
