@@ -1,4 +1,4 @@
-import { CheckCircleIcon } from 'lucide-react';
+import { CheckCircleIcon, SparklesIcon, TrophyIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { Button } from '@/elements/button';
@@ -34,41 +34,89 @@ export const SurveyComplete = () => {
   }, []);
 
   return (
-    <>
-      {/* 완료 헤더 */}
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-green-100 to-emerald-200 rounded-full mb-4 shadow-lg">
-          <CheckCircleIcon className="w-12 h-12 text-green-600" />
-        </div>
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">설문조사 완료!</h2>
-        <p className="text-gray-600 text-lg">소중한 답변 감사합니다 </p>
-      </div>
+    <div className="flex flex-col lg:flex-row lg:items-center lg:gap-12 xl:gap-16">
+      {/* 왼쪽 섹션: 완료 아이콘 + 텍스트 */}
+      <div className="lg:flex-1 lg:text-left">
+        <div className="text-center lg:text-left mb-8 lg:mb-0 relative">
+          {/* 배경 장식 */}
+          <div className="absolute -top-4 -left-4 lg:-left-8">
+            <SparklesIcon className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400 animate-pulse" />
+          </div>
+          <div className="absolute -top-2 -right-4 lg:-right-8">
+            <SparklesIcon className="w-4 h-4 sm:w-6 sm:h-6 text-pink-400 animate-pulse delay-500" />
+          </div>
 
-      {/* 결과 공개 카운트다운 */}
-      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-2xl p-6 mb-12 border border-blue-100 shadow-lg">
-        <div className="mb-4">
-          <h3 className="text-blue-700 font-bold text-lg">결과 공개는</h3>
-          <p className="text-blue-600 text-sm">2025년 9월 6일까지 기다려주세요!</p>
-        </div>
-
-        {/* 카운트다운 타이머 */}
-        <div className="grid grid-cols-4 gap-3 mb-4">
-          {SURVEY_RESULT_TIMER.map(({ key, label }, index) => (
-            <div key={index} className="bg-white rounded-xl p-3 text-center border border-blue-100 shadow-sm">
-              <div className="text-blue-600 font-bold text-2xl">
-                {formatTime(timeLeft[key as keyof typeof timeLeft], key)}
+          <div className="flex justify-center lg:justify-start mb-6 lg:mb-8">
+            <div className="relative">
+              {/* 메인 완료 아이콘 */}
+              <div className="inline-flex items-center justify-center w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-28 lg:h-28 xl:w-32 xl:h-32 bg-gradient-to-br from-emerald-100 via-green-200 to-emerald-300 rounded-full shadow-2xl relative z-10">
+                <CheckCircleIcon className="w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 lg:w-16 lg:h-16 xl:w-18 xl:h-18 text-emerald-600" />
               </div>
-              <div className="text-blue-500 text-xs">{label}</div>
+
+              {/* 트로피 아이콘 */}
+              <div className="absolute -top-2 -right-2 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-yellow-200 to-yellow-400 rounded-full flex items-center justify-center shadow-lg">
+                <TrophyIcon className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-700" />
+              </div>
+
+              {/* 회전하는 링 */}
+              <div className="absolute inset-0 rounded-full border-4 border-dashed border-emerald-300 animate-spin opacity-30"></div>
             </div>
-          ))}
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-emerald-600 via-green-600 to-emerald-700 bg-clip-text text-transparent mb-4 lg:mb-6 leading-tight">
+            설문조사 완료!
+          </h2>
+          <p className="text-gray-600 text-lg sm:text-xl md:text-2xl lg:text-xl font-medium">
+            소중한 답변 감사합니다 ✨
+          </p>
         </div>
       </div>
-      <Button
-        className="w-full cursor-pointer bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white font-bold text-lg py-4 shadow-lg hover:shadow-xl"
-        size="lg"
-      >
-        설문 다시하기
-      </Button>
-    </>
+
+      {/* 오른쪽 섹션: 카운트다운 + 버튼 */}
+      <div className="lg:flex-1 lg:max-w-lg xl:max-w-xl">
+        {/* 결과 공개 카운트다운 */}
+        <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-3xl lg:rounded-[2rem] p-6 sm:p-7 md:p-8 lg:p-6 xl:p-8 mb-8 border border-blue-100/50 shadow-2xl backdrop-blur-sm relative overflow-hidden">
+          {/* 장식적 배경 */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-200/20 to-transparent rounded-full -mr-16 -mt-16"></div>
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-purple-200/20 to-transparent rounded-full -ml-12 -mb-12"></div>
+
+          <div className="relative z-10 mb-6 lg:mb-8 text-center lg:text-left">
+            <div className="flex items-center justify-center lg:justify-start gap-2 mb-2">
+              <SparklesIcon className="w-5 h-5 text-blue-600" />
+              <h3 className="text-blue-700 font-bold text-xl sm:text-2xl md:text-3xl lg:text-2xl xl:text-3xl">
+                결과 공개는
+              </h3>
+            </div>
+            <p className="text-blue-600 text-base sm:text-lg md:text-xl lg:text-lg">
+              2025년 9월 6일까지 기다려주세요! 🎯
+            </p>
+          </div>
+
+          {/* 카운트다운 타이머 */}
+          <div className="relative z-10 grid grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-4 mb-4">
+            {SURVEY_RESULT_TIMER.map(({ key, label }, index) => (
+              <div
+                key={index}
+                className="bg-white/80 backdrop-blur-sm rounded-2xl lg:rounded-3xl p-3 sm:p-4 md:p-5 lg:p-4 text-center border border-blue-100/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                <div className="text-blue-600 font-bold text-xl sm:text-2xl md:text-3xl lg:text-2xl xl:text-3xl mb-1">
+                  {formatTime(timeLeft[key as keyof typeof timeLeft], key)}
+                </div>
+                <div className="text-blue-500 text-xs sm:text-sm md:text-base lg:text-sm font-medium">{label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 다시하기 버튼 */}
+        <Button
+          className="w-full cursor-pointer bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 hover:from-blue-600 hover:via-indigo-600 hover:to-purple-600 text-white font-bold text-lg sm:text-xl md:text-2xl lg:text-xl py-4 sm:py-5 md:py-6 lg:py-4 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300 rounded-2xl"
+          size="lg"
+        >
+          <SparklesIcon className="w-5 h-5 mr-2" />
+          설문 다시하기
+        </Button>
+      </div>
+    </div>
   );
 };
