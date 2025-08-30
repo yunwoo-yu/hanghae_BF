@@ -25,7 +25,7 @@ interface LoginFormErrors {
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-  // const { login } = useAuth(); // AuthContext에서 login 함수 가져오기
+  const { login } = useAuth(); // AuthContext에서 login 함수 가져오기
   const [formData, setFormData] = useState<LoginFormData>({
     name: '',
     userId: '',
@@ -41,9 +41,8 @@ const Login: React.FC = () => {
       setIsLoading(true);
     },
     onSuccess: (res) => {
-      console.log(res);
-      // login(user);
-      // navigate('/hobby-select');
+      login(res.user);
+      navigate('/hobby-select');
     },
     onError: (error) => {
       console.log(error);

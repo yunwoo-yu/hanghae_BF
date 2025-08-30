@@ -1,20 +1,22 @@
+import type { User } from '@/apis/users';
 import type { useMutation } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 // 사용자 정보 타입 정의
-export interface User {
-  name: string;
-  id: string;
-  image: string;
-  link: string;
-}
+// export interface User {
+//   name: string;
+//   id: string;
+//   image: string;
+//   link: string;
+//   hobbies?: string[];
+// }
 
 // AuthContext 타입 정의
 interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
-  login: (userData: User) => void;
+  login: (userData?: User) => void;
   logout: () => void;
 }
 
@@ -45,7 +47,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   // 로그인 함수 - 사용자 정보를 저장하고 인증 상태를 true로 설정
-  const login = (userData: User) => {
+  const login = (userData?: User) => {
+    if (!userData) return;
+
     setUser(userData);
     // localStorage에도 저장하여 새로고침 시에도 유지되도록 함
     localStorage.setItem('user', JSON.stringify(userData));
