@@ -16,7 +16,7 @@ export const SurveyComplete = () => {
     minutes: 0,
     seconds: 0,
   });
-  const { answers } = useSurvey();
+  const { answers, resetSurvey } = useSurvey();
   const { user } = useAuth();
 
   const { mutate } = useMutation({
@@ -133,6 +133,7 @@ export const SurveyComplete = () => {
         <Button
           className="w-full max-w-md cursor-pointer bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 hover:from-blue-600 hover:via-indigo-600 hover:to-purple-600 text-white font-bold text-lg sm:text-xl md:text-xl py-4 sm:py-5 md:py-6 lg:py-4 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300 rounded-2xl"
           size="lg"
+          onClick={resetSurvey}
         >
           <SparklesIcon className="w-5 h-5 mr-2" />
           설문 다시하기
