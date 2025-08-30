@@ -87,11 +87,7 @@ const getWorst5User = (): MatchingUser[] => [
 export const ResultDetail = () => {
   const { id } = useParams();
 
-  const {
-    data: userData,
-    isLoading,
-    error,
-  } = useQuery({
+  const { data: userData } = useQuery({
     queryKey: ['user', id],
     queryFn: () => getUser(id!),
     select: (res) => res.data,
@@ -105,9 +101,7 @@ export const ResultDetail = () => {
     window.alert('롤링페이퍼 작성');
   };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error occurred</div>;
-  if (!userData) return <div>User not found</div>;
+  if (!userData) return null;
 
   return (
     <div className="space-y-4 p-8 min-h-dvh bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
