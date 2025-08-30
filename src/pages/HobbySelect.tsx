@@ -65,7 +65,6 @@ export const HobbySelect = () => {
       <div className="max-w-5xl mx-auto">
         {/* 헤더 */}
         <Card className="mb-6 border-0 shadow-md bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-100/20 via-indigo-100/20 to-purple-100/20"></div>
           <CardHeader className="text-center relative z-10 py-8">
             <div className="mb-4">
               <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br bg-white rounded-full mb-3 shadow-md">
