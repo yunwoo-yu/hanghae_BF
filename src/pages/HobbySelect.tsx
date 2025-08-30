@@ -9,312 +9,12 @@ import { Button } from '@/elements/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/elements/card';
 import { Label } from '@/elements/label';
 import { PATH } from '@/routers/router';
-
-// 취미 데이터 타입 정의
-interface Hobby {
-  id: string;
-  name: string;
-  category: string;
-  icon: string;
-  color: string;
-  hoverColor: string;
-  description: string;
-}
-
-// 취미 데이터
-const hobbies: Hobby[] = [
-  // 게임/엔터테인먼트
-  {
-    id: 'boardgame',
-    name: '보드게임',
-    category: '게임',
-    icon: '/images/hobby/Game die.png',
-    color: 'bg-blue-50 border-blue-200',
-    hoverColor: 'bg-blue-100 border-blue-300',
-    description: '전략과 재미의 보드게임',
-  },
-  {
-    id: 'console',
-    name: '콘솔게임',
-    category: '게임',
-    icon: '/images/hobby/Video game.png',
-    color: 'bg-green-50 border-green-200',
-    hoverColor: 'bg-green-100 border-green-300',
-    description: '콘솔로 즐기는 게임',
-  },
-  {
-    id: 'pcgame',
-    name: 'PC게임',
-    category: '게임',
-    icon: '/images/hobby/Joystick.png',
-    color: 'bg-purple-50 border-purple-200',
-    hoverColor: 'bg-purple-100 border-purple-300',
-    description: 'PC로 즐기는 게임',
-  },
-  {
-    id: 'escape',
-    name: '방탈출',
-    category: '게임',
-    icon: '/images/hobby/Door.png',
-    color: 'bg-red-50 border-red-200',
-    hoverColor: 'bg-red-100 border-red-300',
-    description: '수수께끼를 풀어 탈출하기',
-  },
-
-  // 예술/창작
-  {
-    id: 'photography',
-    name: '사진 찍기',
-    category: '예술',
-    icon: '/images/hobby/Camera.png',
-    color: 'bg-amber-50 border-amber-200',
-    hoverColor: 'bg-amber-100 border-amber-300',
-    description: '순간을 영원히 담기',
-  },
-  {
-    id: 'reading',
-    name: '독서',
-    category: '예술',
-    icon: '/images/hobby/Books.png',
-    color: 'bg-indigo-50 border-indigo-200',
-    hoverColor: 'bg-indigo-100 border-indigo-300',
-    description: '지식과 상상력의 확장',
-  },
-  {
-    id: 'dance',
-    name: '댄스',
-    category: '예술',
-    icon: '/images/hobby/Dancing.png',
-    color: 'bg-pink-50 border-pink-200',
-    hoverColor: 'bg-pink-100 border-pink-300',
-    description: '음악에 맞춰 춤추기',
-  },
-  {
-    id: 'kono',
-    name: '코노',
-    category: '예술',
-    icon: '/images/hobby/Microphone.png',
-    color: 'bg-orange-50 border-orange-200',
-    hoverColor: 'bg-orange-100 border-orange-300',
-    description: '창의적인 놀이',
-  },
-  {
-    id: 'coding',
-    name: '코딩',
-    category: '기술',
-    icon: '/images/hobby/Laptop.png',
-    color: 'bg-gray-50 border-gray-200',
-    hoverColor: 'bg-gray-100 border-gray-300',
-    description: '논리적 사고와 창작',
-  },
-
-  // 음식/음료
-  {
-    id: 'soccer',
-    name: '축구',
-    category: '운동',
-    icon: '/images/hobby/Soccer ball.png',
-    color: 'bg-amber-50 border-amber-200',
-    hoverColor: 'bg-amber-100 border-amber-300',
-    description: '축구를 즐기기',
-  },
-  {
-    id: 'beer',
-    name: '음주',
-    category: '음식',
-    icon: '/images/hobby/Beer mug.png',
-    color: 'bg-yellow-50 border-yellow-200',
-    hoverColor: 'bg-yellow-100 border-yellow-300',
-    description: '맥주와 함께하는 시간',
-  },
-
-  // 운동/스포츠
-  {
-    id: 'hiking',
-    name: '등산',
-    category: '운동',
-    icon: '/images/hobby/Snow-capped mountain.png',
-    color: 'bg-green-50 border-green-200',
-    hoverColor: 'bg-green-100 border-green-300',
-    description: '산을 오르며 자연을 느끼기',
-  },
-  {
-    id: 'climbing',
-    name: '클라이밍',
-    category: '운동',
-    icon: '/images/hobby/Climbing.png',
-    color: 'bg-red-50 border-red-200',
-    hoverColor: 'bg-red-100 border-red-300',
-    description: '벽을 타며 도전하기',
-  },
-  {
-    id: 'walking',
-    name: '산책',
-    category: '운동',
-    icon: '/images/hobby/Walking.png',
-    color: 'bg-blue-50 border-blue-200',
-    hoverColor: 'bg-blue-100 border-blue-300',
-    description: '천천히 걸으며 여유를 즐기기',
-  },
-  {
-    id: 'baseball',
-    name: '야구',
-    category: '운동',
-    icon: '/images/hobby/Baseball.png',
-    color: 'bg-green-50 border-green-200',
-    hoverColor: 'bg-green-100 border-green-300',
-    description: '야구로 운동하기',
-  },
-  {
-    id: 'exercise',
-    name: '운동',
-    category: '운동',
-    icon: '/images/hobby/Tennis.png',
-    color: 'bg-red-50 border-red-200',
-    hoverColor: 'bg-red-100 border-red-300',
-    description: '체력 단련과 건강 관리',
-  },
-
-  // 엔터테인먼트
-  {
-    id: 'anime',
-    name: '애니메이션',
-    category: '엔터테인먼트',
-    icon: '/images/hobby/Television.png',
-    color: 'bg-purple-50 border-purple-200',
-    hoverColor: 'bg-purple-100 border-purple-300',
-    description: '애니메이션 감상하기',
-  },
-  {
-    id: 'movie',
-    name: '영화',
-    category: '엔터테인먼트',
-    icon: '/images/hobby/Clapper board.png',
-    color: 'bg-slate-50 border-slate-200',
-    hoverColor: 'bg-slate-100 border-slate-300',
-    description: '다양한 이야기와 감동',
-  },
-  {
-    id: 'knitting',
-    name: '뜨개질',
-    category: '예술',
-    icon: '/images/hobby/Yarn.png',
-    color: 'bg-pink-50 border-pink-200',
-    hoverColor: 'bg-pink-100 border-pink-300',
-    description: '뜨개질로 창작하기',
-  },
-  {
-    id: 'travel',
-    name: '여행',
-    category: '여행',
-    icon: '/images/hobby/Airplane.png',
-    color: 'bg-teal-50 border-teal-200',
-    hoverColor: 'bg-teal-100 border-teal-300',
-    description: '새로운 경험과 발견',
-  },
-  {
-    id: 'camping',
-    name: '캠핑',
-    category: '여행',
-    icon: '/images/hobby/Camping.png',
-    color: 'bg-green-50 border-green-200',
-    hoverColor: 'bg-green-100 border-green-300',
-    description: '자연 속에서 캠핑하기',
-  },
-
-  // 음식/요리
-  {
-    id: 'cooking',
-    name: '요리',
-    category: '음식',
-    icon: '/images/hobby/Cook.png',
-    color: 'bg-orange-50 border-orange-200',
-    hoverColor: 'bg-orange-100 border-orange-300',
-    description: '맛과 창의성의 조화',
-  },
-  {
-    id: 'sleeping',
-    name: '잠자기',
-    category: '휴식',
-    icon: '/images/hobby/Yawning face.png',
-    color: 'bg-blue-50 border-blue-200',
-    hoverColor: 'bg-blue-100 border-blue-300',
-    description: '충분한 휴식과 수면',
-  },
-  {
-    id: 'cafe',
-    name: '카페 탐방',
-    category: '음식',
-    icon: '/images/hobby/Hot beverage.png',
-    color: 'bg-amber-50 border-amber-200',
-    hoverColor: 'bg-amber-100 border-amber-300',
-    description: '다양한 카페를 찾아다니기',
-  },
-  {
-    id: 'restaurant',
-    name: '맛집 탐방',
-    category: '음식',
-    icon: '/images/hobby/Fork and knife with plate.png',
-    color: 'bg-red-50 border-red-200',
-    hoverColor: 'bg-red-100 border-red-300',
-    description: '맛있는 음식점 찾기',
-  },
-
-  // 문화/예술
-  {
-    id: 'musical',
-    name: '뮤지컬',
-    category: '문화',
-    icon: '/images/hobby/Circus tent.png',
-    color: 'bg-purple-50 border-purple-200',
-    hoverColor: 'bg-purple-100 border-purple-300',
-    description: '뮤지컬 공연 감상',
-  },
-  {
-    id: 'writing',
-    name: '글쓰기',
-    category: '예술',
-    icon: '/images/hobby/Pencil.png',
-    color: 'bg-indigo-50 border-indigo-200',
-    hoverColor: 'bg-indigo-100 border-indigo-300',
-    description: '생각과 감정을 글로 표현',
-  },
-  {
-    id: 'crane',
-    name: '인형 뽑기',
-    category: '게임',
-    icon: '/images/hobby/Teddy bear.png',
-    color: 'bg-pink-50 border-pink-200',
-    hoverColor: 'bg-pink-100 border-pink-300',
-    description: '인형 뽑기 게임',
-  },
-  {
-    id: 'drawing',
-    name: '그림 그리기',
-    category: '예술',
-    icon: '/images/hobby/Artist palette.png',
-    color: 'bg-pink-50 border-pink-200',
-    hoverColor: 'bg-pink-100 border-pink-300',
-    description: '색과 선으로 표현하기',
-  },
-
-  // 음악
-  {
-    id: 'music',
-    name: '음악듣기',
-    category: '음악',
-    icon: '/images/hobby/Headphone.png',
-    color: 'bg-indigo-50 border-indigo-200',
-    hoverColor: 'bg-indigo-100 border-indigo-300',
-    description: '다양한 음악 감상하기',
-  },
-];
+import { HOBBIES } from '@/utils/hobbyUtils';
 
 export const HobbySelect = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [selectedHobbies, setSelectedHobbies] = useState<string[]>([]);
-
   const { mutate } = useMutation({
     mutationFn: ({ userHobbies, userId }: { userHobbies: string[]; userId: string }) =>
       updateUserHobbies(userId, userHobbies),
@@ -349,9 +49,6 @@ export const HobbySelect = () => {
       }
     });
   };
-
-  // 모든 취미 목록 (필터링 없음)
-  const allHobbies = hobbies;
 
   // 다음 단계로 진행
   const handleSubmit = () => {
@@ -399,7 +96,7 @@ export const HobbySelect = () => {
 
         {/* 취미 선택 그리드 */}
         <div className="grid grid-cols-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3 mb-8">
-          {allHobbies.map((hobby) => {
+          {HOBBIES.map((hobby) => {
             const isSelected = selectedHobbies.includes(hobby.id);
             const isDisabled = !isSelected && selectedHobbies.length >= MAX_SELECTIONS;
 
@@ -455,7 +152,7 @@ export const HobbySelect = () => {
             <CardContent>
               <div className="flex flex-wrap gap-2">
                 {selectedHobbies.map((hobbyId) => {
-                  const hobby = hobbies.find((h) => h.id === hobbyId);
+                  const hobby = HOBBIES.find((h) => h.id === hobbyId);
                   return (
                     <Badge
                       key={hobbyId}

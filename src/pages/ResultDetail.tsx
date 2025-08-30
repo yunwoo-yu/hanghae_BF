@@ -1,7 +1,7 @@
 import { ChevronRight, MousePointerClick, PencilLine } from 'lucide-react';
 import { Link, useParams } from 'react-router';
 
-import cloverSvg from '@/assets/result/clover.svg';
+import cloverSvg from '@/assets/images/result/clover.svg';
 import { MatchingDialog } from '@/components/MatchingDialog';
 import TopThree from '@/components/result/TopThree';
 import usersRawData from '@/data/users.json';
