@@ -1,26 +1,19 @@
-type User = {
-  name: string;
-  id: string;
-  image: string;
-  link: string;
-};
+import type { User } from '@/apis/users';
 
 type UserRawData = {
-  [key: string]: User;
+  [key: string]: Omit<User, 'id'>;
 };
 
 export const convertRawDataToUsers = (rawData: UserRawData): User[] => {
-  return Object.values(rawData).map((user) => ({
-    name: user.name || '',
-    id: user.id || '',
-    image: user.image || '',
-    link: user.link || '',
+  return Object.entries(rawData).map(([userId, userData]) => ({
+    id: userId,
+    ...userData,
   }));
 };
 
 export const findUserById = (rawData: UserRawData, id?: string) => {
   if (!id) throw Error('');
   const user = rawData[id];
-  if (user) return { ...user, hobbies: ['1', '2', '3'] };
+  if (user) return user;
   throw Error('유저가 없습니다.');
 };

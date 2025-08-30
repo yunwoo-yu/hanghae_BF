@@ -1,9 +1,10 @@
+import type { User } from '@/apis/users';
 import { MatchingDialog } from '@/components/MatchingDialog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/elements/avatar';
 import { cn } from '@/lib/utils';
 
 interface Props {
-  users: { name: string; github: string; profileImage: string }[];
+  users: User[];
 }
 
 const rankingStyle: Record<number, { order: string; gradientColor: string; baseColor: string }> = {
@@ -37,7 +38,7 @@ export default function TopThree({ users }: Props) {
                   )}
                 ></div>
                 <Avatar className={'relative w-16 h-16 m-1'}>
-                  <AvatarImage src={user.profileImage} />
+                  <AvatarImage src={user.image} />
                   <AvatarFallback>{user.name[0]}</AvatarFallback>
                 </Avatar>
               </div>
@@ -56,7 +57,7 @@ export default function TopThree({ users }: Props) {
               {/* 이름 */}
               <div className="mt-1 text-center">
                 <div className="font-semibold text-sm">{user.name}</div>
-                <div className="text-xs text-gray-500">@{user.github}</div>
+                <div className="text-xs text-gray-500">@{user.id}</div>
               </div>
             </div>
           )}
