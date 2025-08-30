@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router';
 import { twMerge } from 'tailwind-merge';
 
-import { getParticleColor } from '@/utils/particleUtils';
 import { useAuth } from '@/contexts/AuthContext';
 import { PATH } from '@/routers/router';
+import { getParticleColor } from '@/utils/particleUtils';
 
 export const Splash = () => {
   const navigate = useNavigate();
@@ -106,7 +106,7 @@ export const Splash = () => {
       )}
 
       {/* 메인 콘텐츠 */}
-      <div className="relative z-10 flex flex-col items-center space-y-8 px-6 w-full max-w-md">
+      <div className="relative z-10 flex flex-col items-center space-y-8 md:px-6 w-full ">
         {/* 메인 로고 */}
         <div className="flex flex-col items-center space-y-6">
           <div className="relative group">
@@ -155,10 +155,10 @@ export const Splash = () => {
               stage >= 3 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
             }`}
           >
-            <h1 className="font-bold bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 bg-clip-text text-transparent leading-tight text-3xl sm:text-4xl mb-4 animate-gradient">
+            <h1 className="font-bold font-PyeongchangPeace bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 bg-clip-text text-transparent leading-tight text-3xl sm:text-4xl mb-4 animate-gradient">
               항해에서 BP 말고 BF 찾기
             </h1>
-            <p className="text-white/80 text-base sm:text-lg font-medium animate-fade-in-up">
+            <p className="text-white/80 font-PyeongchangPeace text-base sm:text-lg font-medium animate-fade-in-up">
               나랑 찰떡궁합인 항해인은 누구?
             </p>
           </div>
