@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { AlertCircle, Lock, User } from 'lucide-react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { Navigate, useNavigate } from 'react-router';
 
 import { authenticateUser } from '@/apis/users';
 import { useAuth } from '@/contexts/AuthContext';
@@ -10,6 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader } from '@/elements/card'
 import { Input } from '@/elements/input';
 import { Label } from '@/elements/label';
 import { Layout } from '@/elements/layout';
+import { PATH } from '@/routers/router';
 
 interface LoginFormData {
   name: string;
@@ -24,7 +25,7 @@ interface LoginFormErrors {
 
 export const Login = () => {
   const navigate = useNavigate();
-  const { login } = useAuth(); // AuthContext에서 login 함수 가져오기
+  const { login, user } = useAuth(); // AuthContext에서 login 함수 가져오기
   const [formData, setFormData] = useState<LoginFormData>({
     name: '',
     userId: '',
@@ -86,6 +87,8 @@ export const Login = () => {
 
     mutate(formData);
   };
+
+  if (user) return <Navigate to={PATH.HOBBY_SELECT()} />;
 
   return (
     <Layout>
