@@ -4,7 +4,10 @@ import { useNavigate } from 'react-router';
 
 import { getAllUsers } from '@/apis/users';
 import cloverSvg from '@/assets/images/result/clover.svg';
+import whaleSvg from '@/assets/whale.svg';
+import { CloverModal } from '@/components/CloverModal';
 import { TeamSection } from '@/components/result/TeamSection';
+import { WhaleModal } from '@/components/WhaleModal';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/elements/button';
 import { Layout } from '@/elements/layout';
@@ -13,6 +16,7 @@ import { convertRawDataToUsers, getSortedTeamGroups } from '@/utils/UserUtils';
 export const ResultHome = () => {
   const navigate = useNavigate();
   const { user: currentUser } = useAuth();
+
   const { data } = useQuery({
     queryKey: ['users'],
     queryFn: getAllUsers,
@@ -40,10 +44,34 @@ export const ResultHome = () => {
         </div>
 
         <div className="text-center text-sm xs:text-base md:text-md text-purple-100/80  whitespace-pre-line ">
-          <img src={cloverSvg} alt="clover emoji" width="24" height="24" className="inline" />
-          결과 공개까지 기다려주셔서 정말 감사합니다!
-          <img src={cloverSvg} alt="clover emoji" width="24" height="24" className="inline" />
-          {'\n'} 항해인 중 나랑 찰떡궁합인 사람들은 과연 누구일까요?
+          <div className="flex items-center justify-center">
+            {currentUser?.id && (
+              <CloverModal userId={currentUser?.id}>
+                <button>
+                  <img
+                    src={cloverSvg}
+                    alt="clover emoji"
+                    width="24"
+                    height="24"
+                    className="hover:scale-200 transition-transform duration-200 hover:brightness-110 cursor-pointer"
+                  />
+                </button>
+              </CloverModal>
+            )}
+            결과 공개까지 기다려주셔서 정말 감사합니다!
+            <WhaleModal>
+              <button>
+                <img
+                  src={whaleSvg}
+                  alt="whale emoji"
+                  width="24"
+                  height="24"
+                  className="hover:scale-200 transition-transform duration-200 hover:brightness-110 cursor-pointer"
+                />
+              </button>
+            </WhaleModal>
+          </div>
+          항해인 중 나랑 찰떡궁합인 사람들은 과연 누구일까요?
         </div>
 
         <div className="flex justify-end mt-4 mb-8 md:my-8 px-4 lg:px-0">
